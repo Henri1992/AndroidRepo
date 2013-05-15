@@ -1,0 +1,6 @@
+Importeer android.sql in phpMyAdmin.
+Kopieer de map android naar htdocs van XAMPP.
+Kopieer PHPtestApp naar ADB/Eclipse Workspace en importeer deze. (Niet getest)
+Open MainActivity.java in de de map src/com/example/phptestapp.
+Verander in de url (regel 64) het IP-adres door IP-adres van jouw computer (dus niet 127.0.0.1) en /NetBeans... door de locatie waar jouw PHP-bestand staat.
+
