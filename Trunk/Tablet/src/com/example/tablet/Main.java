@@ -24,7 +24,7 @@ public class Main extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(v.getContext(), GameView.class);
+				Intent intent = new Intent(v.getContext(), Game.class);
 				startActivityForResult(intent, 0);
 			}
 			
