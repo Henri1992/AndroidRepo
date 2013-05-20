@@ -18,12 +18,14 @@ public class MainActivity extends Activity {
 	private static final String METHOD_NAME = "Welkom";
 	private static final String NAMESPACE = "http://tempuri.org/";
 	private static final String URL = "http://techniek.server-ict.nl:20824/Service.asmx";
-	TextView tv;
+	
+	private TextView tv;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
 		tv = (TextView)findViewById(R.id.TextView1);
 		
 		SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
@@ -44,7 +46,6 @@ public class MainActivity extends Activity {
 		{
 			e.printStackTrace();
 		}
-		
 	}
 
 	@Override
@@ -52,8 +53,6 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
-		
-		
 	}
 
 }
