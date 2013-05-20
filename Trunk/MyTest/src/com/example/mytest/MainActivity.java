@@ -1,15 +1,17 @@
 package com.example.mytest;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.Menu;
-
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -25,11 +27,16 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+	}
+
+	public void sendMessage(View view) {
+		
+		EditText editText = (EditText) findViewById(R.id.edit_message);
 		
 		tv = (TextView)findViewById(R.id.TextView1);
 		
 		SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-		Request.addProperty("naam", "Leroy");
+		Request.addProperty("naam", editText.getText().toString());
 		
 		SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		soapEnvelope.dotNet = true;
@@ -47,7 +54,7 @@ public class MainActivity extends Activity {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
