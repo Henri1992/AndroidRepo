@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
 	
 	public void init()
 	{
-		Button start = (Button) findViewById(R.id.bStart);
+		Button start = (Button) findViewById(R.id.startButton);
 		start.setOnClickListener(new OnClickListener()
 		{
 
@@ -38,6 +38,19 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(v.getContext(), Game.class);
 				startActivity(intent);
+			}
+			
+		});
+		
+		Button exit = (Button) findViewById(R.id.exitButton);
+		exit.setOnClickListener(new OnClickListener()
+		{
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+	            System.exit(0);
 			}
 			
 		});
