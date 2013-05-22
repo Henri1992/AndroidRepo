@@ -11,7 +11,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 import android.os.Handler.Callback;
 
 public class Dice extends Activity {
@@ -49,7 +48,7 @@ public class Dice extends Activity {
     Callback callback = new Callback() {
         public boolean handleMessage(Message msg) {
             	Random randomno = new Random(System.currentTimeMillis());
-            	int diceRand = randomno.nextInt();
+            	int diceRand = randomno.nextInt(5 +1);
             switch(diceRand+1) {
             case 1:
                 dice_picture.setImageResource(R.drawable.one);
