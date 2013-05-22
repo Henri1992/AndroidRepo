@@ -7,9 +7,9 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
-
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -31,28 +31,7 @@ public class MainActivity extends Activity {
 
 	public void sendMessage(View view) {
 		
-		EditText editText = (EditText) findViewById(R.id.edit_message);
-		
-		tv = (TextView)findViewById(R.id.TextView1);
-		
-		SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
-		Request.addProperty("naam", editText.getText().toString());
-		
-		SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-		soapEnvelope.dotNet = true;
-		soapEnvelope.setOutputSoapObject(Request);
-		
-		HttpTransportSE aht = new HttpTransportSE(URL);
-		try
-		{
-			aht.call(SOAP_ACTION, soapEnvelope);
-			SoapPrimitive resultString = (SoapPrimitive)soapEnvelope.getResponse();
-			tv.setText(resultString.toString());
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		new AsyncTaskClass().execute();
 	}
 	
 	@Override
@@ -60,6 +39,44 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+
+	///////////////////////////////
+	//Inner class
+	public class AsyncTaskClass extends AsyncTask<Void, Void, String>
+	{
+		@Override
+		protected String doInBackground(Void... params) {
+			EditText editText = (EditText) findViewById(R.id.edit_message);
+			
+			SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
+			Request.addProperty("naam", editText.getText().toString());
+			
+			SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+			soapEnvelope.dotNet = true;
+			soapEnvelope.setOutputSoapObject(Request);
+			
+			HttpTransportSE aht = new HttpTransportSE(URL);
+			try
+			{
+				aht.call(SOAP_ACTION, soapEnvelope);
+				SoapPrimitive resultString = (SoapPrimitive)soapEnvelope.getResponse();
+				
+				return resultString.toString();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+			// Wanneer try faalt return message
+			return "Failed to connect";
+		}
+
+		protected void onPostExecute(String result) {
+			tv = (TextView)findViewById(R.id.TextView1);
+			tv.setText(result);
+		}
 	}
 
 }
