@@ -42,6 +42,19 @@ public class MainActivity extends Activity {
 			
 		});
 		
+		Button howtoplay = (Button) findViewById(R.id.howtoplayButton);
+		howtoplay.setOnClickListener(new OnClickListener()
+		{
+
+			@Override
+			public void onClick(View b) {
+				// TODO Auto-generated method stub
+				Intent hIntent = new Intent(b.getContext(), howtoplay.class);
+				startActivity(hIntent);
+			}
+			
+		});
+		
 		Button exit = (Button) findViewById(R.id.exitButton);
 		exit.setOnClickListener(new OnClickListener()
 		{

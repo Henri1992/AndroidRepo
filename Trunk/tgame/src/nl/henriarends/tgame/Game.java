@@ -10,7 +10,7 @@ public class Game extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(new GameView(this));
+		setContentView(R.layout.game);
 		this.setRequestedOrientation(
 		ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}
