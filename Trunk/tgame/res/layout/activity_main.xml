@@ -10,11 +10,11 @@
     tools:context=".MainActivity" >
 
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/newGameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="250dp"
         android:background="@drawable/menubutton1" />
 
     <Button
@@ -23,14 +23,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="130dp"
         android:background="@drawable/menubutton3" />
 
     <Button
         android:id="@+id/howtoplayButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="450dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/menubutton4" />
 
