@@ -10,7 +10,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/dice3d"
+        android:icon="@drawable/diceappicon"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         <activity
@@ -27,6 +27,7 @@
         <activity android:label = "@string/app_name" android:name = ".Connect"></activity>
         <activity android:label = "@string/app_name" android:name = ".Game"></activity>
         <activity android:label = "@string/app_name" android:name = ".Dice"></activity>
+        <activity android:label = "@string/app_name" android:name = ".Howto"></activity>
         
     </application>
 

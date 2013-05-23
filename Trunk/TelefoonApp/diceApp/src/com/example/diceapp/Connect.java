@@ -19,7 +19,7 @@ public class Connect extends Activity {
     
     class ConnectHandler implements Runnable {
     public void run() {
-    startActivity(new Intent(getApplication(), Game.class));
+    startActivity(new Intent(getApplication(), Dice.class));
     Connect.this.finish();
     }
     }
