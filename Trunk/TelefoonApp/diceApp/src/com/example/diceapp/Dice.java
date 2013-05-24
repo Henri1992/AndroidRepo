@@ -48,7 +48,7 @@ public class Dice extends Activity {
     Callback callback = new Callback() {
         public boolean handleMessage(Message msg) {
             	Random randomno = new Random(System.currentTimeMillis());
-            	int diceRand = randomno.nextInt(5 +1);
+            	int diceRand = randomno.nextInt(5 + 1);
             switch(diceRand+1) {
             case 1:
                 dice_picture.setImageResource(R.drawable.one);

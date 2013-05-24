@@ -18,10 +18,10 @@ public class Splash extends Activity {
     }
     
     class SplashHandler implements Runnable {
-    public void run() {
-    startActivity(new Intent(getApplication(), Main.class));
-    Splash.this.finish();
-    }
+    	public void run() {
+    		startActivity(new Intent(getApplication(), Main.class));
+    		Splash.this.finish();
+    	}
     }
     
 }
