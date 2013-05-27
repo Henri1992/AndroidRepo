@@ -9,7 +9,6 @@ import org.ksoap2.transport.HttpTransportSE;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -26,9 +25,6 @@ public class MainActivity extends Activity {
 	private static final String METHOD_NAME_R = "Read";
 	private static final String NAMESPACE_R = "http://tempuri.org/";
 	private static final String URL_R = "http://techniek.server-ict.nl:20824/Service.asmx";
-	
-	private TextView tv_W;
-	private TextView tv_R;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +38,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void refreshMessage(View view) {
-		new AsyncTaskClass_R().execute();		
+		new AsyncTaskClass_R().execute(false);		
 	}
 	
 	@Override
@@ -85,6 +81,7 @@ public class MainActivity extends Activity {
 		}
 
 		protected void onPostExecute(String result) {
+			TextView tv_W;
 			tv_W = (TextView)findViewById(R.id.TextView_W);
 			tv_W.setText("Verstuurd: " + result);
 		}
@@ -92,10 +89,27 @@ public class MainActivity extends Activity {
 	
 	///////////////////////////////
 	//Inner class AsyncTaskClass_R
-	public class AsyncTaskClass_R extends AsyncTask<Void, Void, String>
-	{
+	public class AsyncTaskClass_R extends AsyncTask<Boolean, Void, String>
+	{		
 		@Override
-		protected String doInBackground(Void... params) {
+		protected String doInBackground(Boolean... params) {
+			if(params.length != 1) {
+				throw new IllegalArgumentException("params.length != 1");
+			}
+			
+			if(params[0])
+			{
+				// Hier thread slapen i.p.v. dit in onPostExecute
+				// met de Handler methodes removeCallbacks en postDelayed en
+				// een Runnable met new AsyncTaskClass_R().execute();
+				// te doen. Je belast hierdoor niet de main thread.
+				try {
+			        Thread.sleep(10000);         
+			    } catch (InterruptedException e) {
+			       e.printStackTrace();
+			    }
+			}
+			
 			SoapObject Request = new SoapObject(NAMESPACE_R, METHOD_NAME_R);
 			
 			SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -105,48 +119,32 @@ public class MainActivity extends Activity {
 			HttpTransportSE aht = new HttpTransportSE(URL_R);
 			
 			SoapPrimitive resultString = null;
-			
-			//while(!resultString.toString().equals(tv_R.getText()))
-			//{
-				try
-				{
-					aht.call(SOAP_ACTION_R, soapEnvelope);
-					resultString = (SoapPrimitive)soapEnvelope.getResponse();
-					
-					return resultString.toString();
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
-			  	// Wanneer try faalt return message
-				return ("Failed to connect");
-			/*}
-			
-			if(!resultString.toString().equals(tv_R.getText()))
+			try
 			{
-				try {
-			        Thread.sleep(1000);         
-			    } catch (InterruptedException e) {
-			       e.printStackTrace();
-			    }
-			}*/
+				aht.call(SOAP_ACTION_R, soapEnvelope);
+				resultString = (SoapPrimitive)soapEnvelope.getResponse();
 
-			//return null;
+				return resultString.toString();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			// Wanneer try faalt return message
+			return ("Failed to connect");
 		}
-
 		
 		protected void onPostExecute(String result)
 		{
+			TextView tv_R;
+			tv_R = (TextView)findViewById(R.id.TextView_R);
 
-			   tv_R = (TextView)findViewById(R.id.TextView_R);
-
-			   // tv_R.setText("Ontvangen " + resultString.toString());
-			if(result.equals(tv_R.getText()))
+			if(("Ontvangen " + result).equals(tv_R.getText()))
 			{
-				new AsyncTaskClass_R().execute();	
+				new AsyncTaskClass_R().execute(true);
 			}
-			   tv_R.setText(result.toString());
+			
+			tv_R.setText("Ontvangen " + result.toString());
 		}
 	}
 }
