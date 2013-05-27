@@ -6,8 +6,10 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -134,6 +136,10 @@ public class MainActivity extends Activity {
 			return ("Failed to connect");
 		}
 		
+		// Implementeerd een hogere API versie dan minSdkVersion
+		// Fallback voor compatibiliteit met oudere versies zelf geïmplementeerd
+		// Anders fouten op die versies
+		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 		protected void onPostExecute(String result)
 		{
 			TextView tv_R;
@@ -141,7 +147,17 @@ public class MainActivity extends Activity {
 
 			if(("Ontvangen " + result).equals(tv_R.getText()))
 			{
-				new AsyncTaskClass_R().execute(true);
+				// Voorkomt dat thread sleep ervoor zorgt dat andere AsyncTasks
+				// op de thread sleep moeten wachten. (Voert beide AsyncTasks
+				// parallel i.p.v. serieel uit).
+				if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+				{
+					new AsyncTaskClass_R().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, true);
+				}
+				else
+				{
+					new AsyncTaskClass_R().execute(true);
+				}
 			}
 			
 			tv_R.setText("Ontvangen " + result.toString());
