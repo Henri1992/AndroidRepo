@@ -11,4 +11,3 @@ public class Howto extends Activity {
 		setContentView(R.layout.howto);
 	}
 }
-
