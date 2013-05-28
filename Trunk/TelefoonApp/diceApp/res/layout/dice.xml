@@ -5,14 +5,11 @@
     android:gravity="center_horizontal" >
 
     <ImageView
-        android:contentDescription="@string/desc"
         android:id="@+id/rollDice"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="18dp"
-        android:layout_marginTop="20dp"
         android:onClick="HandleClick"
         android:src="@drawable/dice3droll" />
     
