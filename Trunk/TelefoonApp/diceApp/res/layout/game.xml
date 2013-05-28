@@ -6,6 +6,7 @@
     android:orientation="horizontal" >
 
     <ImageView
+        android:contentDescription="@string/desc"
         android:id="@+id/pion1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

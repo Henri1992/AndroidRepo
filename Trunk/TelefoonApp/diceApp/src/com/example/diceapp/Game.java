@@ -19,6 +19,7 @@ public class Game extends Activity {
         	super.onCreate(savedInstanceState);
         	setContentView(R.layout.game);
         	
+        	//dummy: store the total number thrown
         	Game.position = Game.position + Dice.hasrolled;
         	TextView theCorrectAnsTextView = (TextView)findViewById(R.id.positie);
 		    theCorrectAnsTextView.setText("" + Game.position);

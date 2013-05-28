@@ -15,6 +15,7 @@ public class Main extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
+		//Search Button
 		ImageView imgSearch = (ImageView) findViewById(R.id.button_search);
 		imgSearch.setOnClickListener(new OnClickListener() 
 		{
@@ -26,6 +27,7 @@ public class Main extends Activity {
 		    }
 		});
 		
+		//Quit Button
 		ImageView imgQuit = (ImageView) findViewById(R.id.button_quitgame);
 		imgQuit.setOnClickListener(new OnClickListener()
 		{
@@ -37,6 +39,7 @@ public class Main extends Activity {
 			}
 		});
 		
+		//HowTo Button
 		ImageView imgHowTo = (ImageView) findViewById(R.id.button_howto);
 		imgHowTo.setOnClickListener(new OnClickListener()
 		{

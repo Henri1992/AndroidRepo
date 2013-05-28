@@ -16,7 +16,7 @@ public class Connect extends Activity {
 		x.postDelayed(new ConnectHandler(), 500);
 
 	}
-
+	//got to Game activity
 	class ConnectHandler implements Runnable {
 		public void run() {
 			startActivity(new Intent(getApplication(), Game.class));
