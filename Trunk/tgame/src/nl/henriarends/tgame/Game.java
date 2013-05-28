@@ -22,7 +22,7 @@ public class Game extends Activity {
 		
 		player1 = true;
 		
-		if(player1 = true)
+		if(player1 == true)
 		{
 			ImageView imagePlayer1 = (ImageView) findViewById(R.id.player1);
 			imagePlayer1.setImageResource(R.drawable.player1selected);
@@ -33,7 +33,7 @@ public class Game extends Activity {
 			ImageView imagePlayer4 = (ImageView) findViewById(R.id.player4);
 			imagePlayer4.setImageResource(R.drawable.player4);
 		}
-		else if(player2 = true)
+		else if(player2 == true)
 		{
 			ImageView imagePlayer5 = (ImageView) findViewById(R.id.player1);
 			imagePlayer5.setImageResource(R.drawable.player1);
@@ -44,7 +44,7 @@ public class Game extends Activity {
 			ImageView imagePlayer8 = (ImageView) findViewById(R.id.player4);
 			imagePlayer8.setImageResource(R.drawable.player4);
 		}
-		else if(player3 = true)
+		else if(player3 == true)
 		{
 			ImageView imagePlayer9 = (ImageView) findViewById(R.id.player1);
 			imagePlayer9.setImageResource(R.drawable.player1);
@@ -55,7 +55,7 @@ public class Game extends Activity {
 			ImageView imagePlayer12= (ImageView) findViewById(R.id.player4);
 			imagePlayer12.setImageResource(R.drawable.player4);
 		}
-		else if(player4 = true)
+		else if(player4 == true)
 		{
 			ImageView imagePlayer13 = (ImageView) findViewById(R.id.player1);
 			imagePlayer13.setImageResource(R.drawable.player1);
