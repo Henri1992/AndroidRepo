@@ -1,8 +1,6 @@
 package nl.henriarends.tgame;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.view.View;
 
@@ -51,19 +49,6 @@ public class GameView extends View{
 				case 5:
 					break;
 				case 6:
-					if (y < 200)
-					{
-						x = 50;
-						y += 10;
-					}
-					else
-					{
-						x = 50;
-						y = 200;
-					}
-					Bitmap pion1 = BitmapFactory.decodeResource(getResources(), R.drawable.playerblackpion1);
-					canvas.drawBitmap(pion1, x, y, null);
-					invalidate();
 					break;
 			}
 		}

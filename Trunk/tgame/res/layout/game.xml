@@ -191,5 +191,13 @@
         android:layout_marginTop="590dp"
         android:layout_marginLeft="430dp"
         android:src="@drawable/player4" />
+    
+    <!-- Beurten dialog -->
+    <TextView
+        android:id="@+id/TextView_R"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="590dp"
+        android:layout_marginLeft="50dp" />
 
 </RelativeLayout>
