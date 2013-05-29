@@ -4,5 +4,8 @@
     <string name="app_name">diceApp</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="textView2">Your game is trying to connect to the host, please wait.</string>
+	<string name="startRoll">Roll</string>
+	<string name="setTrue">setTrue</string>
+	<string name="setFalse">setFalse</string>
 </resources>

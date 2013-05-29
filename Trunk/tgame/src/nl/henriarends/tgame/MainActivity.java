@@ -29,14 +29,14 @@ public class MainActivity extends Activity {
 	
 	public void init()
 	{
-		Button start = (Button) findViewById(R.id.startButton);
+		Button start = (Button) findViewById(R.id.newGameButton);
 		start.setOnClickListener(new OnClickListener()
 		{
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(v.getContext(), Game.class);
+				Intent intent = new Intent(v.getContext(), Lobby.class);
 				startActivity(intent);
 			}
 			

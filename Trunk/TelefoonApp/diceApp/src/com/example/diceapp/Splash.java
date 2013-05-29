@@ -13,15 +13,15 @@ public class Splash extends Activity {
         setContentView(R.layout.splash);
     
     Handler x = new Handler();
-    x.postDelayed(new SplashHandler(), 5000);
+    x.postDelayed(new SplashHandler(), 2500);
 
     }
     
     class SplashHandler implements Runnable {
-    public void run() {
-    startActivity(new Intent(getApplication(), Main.class));
-    Splash.this.finish();
-    }
+    	public void run() {
+    		startActivity(new Intent(getApplication(), Main.class));
+    		Splash.this.finish();
+    	}
     }
     
 }

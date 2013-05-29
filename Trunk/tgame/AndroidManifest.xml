@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         <activity
-            android:name="nl.henriarends.tgame.MainActivity"
+            android:name="nl.henriarends.tgame.Splashscreen"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,12 +25,22 @@
         
         <activity 
             android:label="@string/app_name"
+            android:name="nl.henriarends.tgame.MainActivity">
+        </activity>
+        
+        <activity 
+            android:label="@string/app_name"
             android:name="nl.henriarends.tgame.Game">
         </activity>
         
         <activity 
             android:label="@string/app_name"
             android:name="nl.henriarends.tgame.howtoplay">
+        </activity>
+        
+        <activity 
+            android:label="@string/app_name"
+            android:name="nl.henriarends.tgame.Lobby">
         </activity>
     </application>
 
