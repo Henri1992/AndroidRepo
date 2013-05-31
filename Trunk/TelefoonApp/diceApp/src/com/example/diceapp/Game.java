@@ -7,130 +7,116 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class Game extends Activity {
 	
-	public static int player = 0;
-	private static int position;
+	protected static int currentplayer = 0;
+	private static int positionp1;
+	private static int positionp2;
+	private static int positionp3;
+	private static int positionp4;
 	
     	@Override
     	protected void onCreate(Bundle savedInstanceState) {
         	super.onCreate(savedInstanceState);
         	setContentView(R.layout.game);
+        	if (Game.currentplayer == 0)
+        	{
+        		Game.currentplayer = 1;
+        		LinearLayout rl1 = (LinearLayout) findViewById(R.id.pRow1);
+                rl1.setVisibility(View.VISIBLE);
+                
+                LinearLayout rl2 = (LinearLayout) findViewById(R.id.pRow2);
+                rl2.setVisibility(View.INVISIBLE);
+                
+                LinearLayout rl3 = (LinearLayout) findViewById(R.id.pRow3);
+                rl3.setVisibility(View.INVISIBLE);
+                
+                LinearLayout rl4 = (LinearLayout) findViewById(R.id.pRow4);
+                rl4.setVisibility(View.INVISIBLE);
+        	}
+        	else if (Game.currentplayer == 1)
+        	{
+        		Game.currentplayer = 2;
+        		LinearLayout rl1 = (LinearLayout) findViewById(R.id.pRow1);
+                rl1.setVisibility(View.INVISIBLE);
+                
+                LinearLayout rl2 = (LinearLayout) findViewById(R.id.pRow2);
+                rl2.setVisibility(View.VISIBLE);
+                
+                LinearLayout rl3 = (LinearLayout) findViewById(R.id.pRow3);
+                rl3.setVisibility(View.INVISIBLE);
+                
+                LinearLayout rl4 = (LinearLayout) findViewById(R.id.pRow4);
+                rl4.setVisibility(View.INVISIBLE);
+        	}
+        	else if (Game.currentplayer == 2)
+        	{
+        		Game.currentplayer = 3;
+        		LinearLayout rl1 = (LinearLayout) findViewById(R.id.pRow1);
+                rl1.setVisibility(View.INVISIBLE);
+                
+                LinearLayout rl2 = (LinearLayout) findViewById(R.id.pRow2);
+                rl2.setVisibility(View.INVISIBLE);
+                
+                LinearLayout rl3 = (LinearLayout) findViewById(R.id.pRow3);
+                rl3.setVisibility(View.VISIBLE);
+                
+                LinearLayout rl4 = (LinearLayout) findViewById(R.id.pRow4);
+                rl4.setVisibility(View.INVISIBLE);
+        	}
+        	else if (Game.currentplayer == 3)
+        	{
+        		Game.currentplayer = 4;
+        		LinearLayout rl1 = (LinearLayout) findViewById(R.id.pRow1);
+                rl1.setVisibility(View.INVISIBLE);
+                
+                LinearLayout rl2 = (LinearLayout) findViewById(R.id.pRow2);
+                rl2.setVisibility(View.INVISIBLE);
+                
+                LinearLayout rl3 = (LinearLayout) findViewById(R.id.pRow3);
+                rl3.setVisibility(View.INVISIBLE);
+                
+                LinearLayout rl4 = (LinearLayout) findViewById(R.id.pRow4);
+                rl4.setVisibility(View.VISIBLE);
+        	}
+        	else if (Game.currentplayer == 4)
+        	{
+        		Game.currentplayer = 1;
+        		LinearLayout rl1 = (LinearLayout) findViewById(R.id.pRow1);
+                rl1.setVisibility(View.VISIBLE);
+                
+                LinearLayout rl2 = (LinearLayout) findViewById(R.id.pRow2);
+                rl2.setVisibility(View.INVISIBLE);
+                
+                LinearLayout rl3 = (LinearLayout) findViewById(R.id.pRow3);
+                rl3.setVisibility(View.INVISIBLE);
+                
+                LinearLayout rl4 = (LinearLayout) findViewById(R.id.pRow4);
+                rl4.setVisibility(View.INVISIBLE);
+        	}
         	
-        	//dummy: store the total number thrown
-        	Game.position = Game.position + Dice.hasrolled;
-        	TextView theCorrectAnsTextView = (TextView)findViewById(R.id.positie);
-		    theCorrectAnsTextView.setText("" + Game.position);
-        	
-        	//Dummy buttons voor het hardcoden van de speler
-        	
-        	Button buttonp1 = (Button) findViewById(R.id.button_p1);
-    		buttonp1.setOnClickListener(new OnClickListener() 
-    		{
-				@Override
-    			public void onClick(View v) 
-    		    {
-		    		Game.player = 1;
-    				TextView theCorrectAnsTextView = (TextView)findViewById(R.id.currentplayer);
-    			    theCorrectAnsTextView.setText("Player: 1");
-    		    }
-    		});
-    		
-        	Button buttonp2 = (Button) findViewById(R.id.button_p2);
-    		buttonp2.setOnClickListener(new OnClickListener() 
-    		{
-				@Override
-    			public void onClick(View v) 
-    		    {
-    		    	Game.player = 2;
-    				TextView theCorrectAnsTextView = (TextView)findViewById(R.id.currentplayer); 
-    				theCorrectAnsTextView.setText("Player: 2");
-    		    }
-    		});
-    		
-        	Button buttonp3 = (Button) findViewById(R.id.button_p3);
-    		buttonp3.setOnClickListener(new OnClickListener() 
-    		{
-				@Override
-    			public void onClick(View v) 
-    		    {
-    		    	Game.player = 3;
-    				TextView theCorrectAnsTextView = (TextView)findViewById(R.id.currentplayer); 
-    				theCorrectAnsTextView.setText("Player: 3");
-    		    }
-    		});
-    		
-        	Button buttonp4 = (Button) findViewById(R.id.button_p4);
-    		buttonp4.setOnClickListener(new OnClickListener() 
-    		{
-				@Override
-    			public void onClick(View v) 
-    		    {
-    		    	Game.player = 4;
-    				TextView theCorrectAnsTextView = (TextView)findViewById(R.id.currentplayer); 
-    				theCorrectAnsTextView.setText("Player: 4");
-    		    }
-    		});
-    		
-    		//eind code dummy buttons voor hardcoden speler
-    		
-    		//dummy buttons voor het zetten van de pion data
-    		//zet pion in het veld
-        	Button insert = (Button) findViewById(R.id.button_insert);
-    		insert.setOnClickListener(new OnClickListener() 
-    		{
-				@Override
-    			public void onClick(View v) 
-    		    {
-    		    	Game.position = 0;
-    		    	
-    				ImageView setImage = (ImageView)findViewById(R.id.pion1); 
-					if (Game.player == 1){
-						setImage.setImageResource(R.drawable.pionroodveld);
-					}
-					else if (Game.player == 2){
-						setImage.setImageResource(R.drawable.pionblauwveld);
-					}
-					else if (Game.player == 3){
-						setImage.setImageResource(R.drawable.piongroenveld);
-					}
-					else if (Game.player == 4){
-						setImage.setImageResource(R.drawable.piongeelveld);
-					}
-					else {
-						setImage.setImageResource(R.drawable.pionzwart);
-					}
-    		    }
-    		});
-    		
-    		//zet pion in finish
-    		Button finish = (Button) findViewById(R.id.button_finish);
-    		finish.setOnClickListener(new OnClickListener()
-    		{
-    			@Override
-    			public void onClick(View v)
-    			{
-    				ImageView setImage = (ImageView)findViewById(R.id.pion1); 
-    				
-					if (Game.player == 1){
-						setImage.setImageResource(R.drawable.pionroodfinish);
-					}
-					else if (Game.player == 2){
-						setImage.setImageResource(R.drawable.pionblauwfinish);
-					}
-					else if (Game.player == 3){
-						setImage.setImageResource(R.drawable.piongroenfinish);
-					}
-					else if (Game.player == 4){
-						setImage.setImageResource(R.drawable.piongeelfinish);
-					}
-					else {
-						setImage.setImageResource(R.drawable.pionzwart);
-					}
-    			}
-    		});	
+        	//positie p1
+        	Game.positionp1 = Game.positionp1 + Dice.hasrolledp1;
+        	TextView pos1View = (TextView)findViewById(R.id.p1pos);
+		    pos1View.setText("Player 1 position: " + Game.positionp1);
+
+        	//positie p2
+        	Game.positionp2 = Game.positionp2 + Dice.hasrolledp2;
+        	TextView pos2View = (TextView)findViewById(R.id.p2pos);
+		    pos2View.setText("Player 2 position: " + Game.positionp2);
+		    
+        	//positie p3
+        	Game.positionp3 = Game.positionp3 + Dice.hasrolledp3;
+        	TextView pos3View = (TextView)findViewById(R.id.p3pos);
+		    pos3View.setText("Player 3 position: " + Game.positionp3);
+		    
+        	//positie p4
+        	Game.positionp4 = Game.positionp4 + Dice.hasrolledp4;
+        	TextView pos4View = (TextView)findViewById(R.id.p4pos);
+		    pos4View.setText("Player 4 position: " + Game.positionp4);
     		
     		//roll
     		Button roll = (Button) findViewById(R.id.button_roll);
