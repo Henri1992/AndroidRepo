@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/menuback"
+    android:keepScreenOn="true"
+    android:orientation="vertical" >
+
+    <!-- Player Green -->
+
+    <RelativeLayout
+        android:layout_align
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white" >
+
+        <ImageView
+            android:id="@+id/playerGreenpion1"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="27dp"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/playergreenpion1" />
+
+        <ImageView
+            android:id="@+id/playerGreenpion2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="85dp"
+            android:layout_marginTop="27dp"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/playergreenpion2" />
+
+        <ImageView
+            android:id="@+id/playerGreenpion3"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="67dp"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/playergreenpion3" />
+
+        <ImageView
+            android:id="@+id/playerGreenpion4"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="85dp"
+            android:layout_marginTop="67dp"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/playergreenpion4" />
+    </RelativeLayout>
+
+</RelativeLayout>
