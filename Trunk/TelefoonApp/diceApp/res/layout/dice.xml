@@ -13,4 +13,13 @@
         android:onClick="HandleClick"
         android:src="@drawable/dice3droll" />
     
+            
+        <TextView
+            android:id="@+id/TextView_W"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Nog niks verstuurd."
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    
 </RelativeLayout>

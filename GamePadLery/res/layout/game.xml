@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/menuback"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:keepScreenOn="true" >
+    
+    <!-- Bord -->
+    <ImageView
+        android:id="@+id/bord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="25dp"
+        android:src="@drawable/bord" />
+    
+    <!-- Player Green -->
+    <ImageView 
+        android:id="@+id/playerGreenpion1"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginLeft="48dp"
+        android:src="@drawable/playergreenpion1" />
+    
+    <ImageView 
+        android:id="@+id/playerGreenpion2"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginLeft="85dp"
+        android:src="@drawable/playergreenpion2" />
+    
+    <ImageView 
+        android:id="@+id/playerGreenpion3"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="67dp"
+        android:layout_marginLeft="48dp"
+        android:src="@drawable/playergreenpion3" />
+    
+    <ImageView 
+        android:id="@+id/playerGreenpion4"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="67dp"
+        android:layout_marginLeft="85dp"
+        android:src="@drawable/playergreenpion4" />
+    
+    <!-- Player Red -->
+    <ImageView 
+        android:id="@+id/playerRedpion1"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginLeft="468dp"
+        android:src="@drawable/playerredpion1" />
+    
+    <ImageView 
+        android:id="@+id/playerRedpion2"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginLeft="505dp"
+        android:src="@drawable/playerredpion2" />
+    
+    <ImageView 
+        android:id="@+id/playerRedpion3"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="67dp"
+        android:layout_marginLeft="468dp"
+        android:src="@drawable/playerredpion3" />
+    
+    <ImageView 
+        android:id="@+id/playerRedpion4"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="67dp"
+        android:layout_marginLeft="505dp"
+        android:src="@drawable/playerredpion4" />
+    
+    <!-- Player Blue -->
+    <ImageView 
+        android:id="@+id/playerBluepion1"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="472dp"
+        android:layout_marginLeft="48dp"
+        android:src="@drawable/playerbluepion1" />
+    
+    <ImageView 
+        android:id="@+id/playerBluepion2"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="472dp"
+        android:layout_marginLeft="85dp"
+        android:src="@drawable/playerbluepion2" />
+    
+    <ImageView 
+        android:id="@+id/playerBluepion3"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="512dp"
+        android:layout_marginLeft="48dp"
+        android:src="@drawable/playerbluepion3" />
+    
+    <ImageView 
+        android:id="@+id/playerBluepion4"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="512dp"
+        android:layout_marginLeft="85dp"
+        android:src="@drawable/playerbluepion4" />
+    
+    <!-- Player Black -->
+    <ImageView 
+        android:id="@+id/playerBlackpion1"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="472dp"
+        android:layout_marginLeft="468dp"
+        android:src="@drawable/playerblackpion1" />
+    
+    <ImageView 
+        android:id="@+id/playerBlackpion2"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="472dp"
+        android:layout_marginLeft="505dp"
+        android:src="@drawable/playerblackpion2" />
+    
+    <ImageView 
+        android:id="@+id/playerBlackpion3"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="512dp"
+        android:layout_marginLeft="468dp"
+        android:src="@drawable/playerblackpion3" />
+    
+    <ImageView 
+        android:id="@+id/playerBlackpion4"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="512dp"
+        android:layout_marginLeft="505dp"
+        android:src="@drawable/playerblackpion4" />
+    
+    <!-- Player aanwijzer -->
+    
+    <ImageView
+        android:id="@+id/player1"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="730dp"
+        android:layout_marginLeft="260dp"
+        android:src="@drawable/player1" />
+    
+    <ImageView
+        android:id="@+id/player2"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="590dp"
+        android:layout_marginLeft="260dp"
+        android:src="@drawable/player2" />
+    
+    <ImageView
+        android:id="@+id/player3"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="730dp"
+        android:layout_marginLeft="430dp"
+        android:src="@drawable/player3" />
+    
+    <ImageView
+        android:id="@+id/player4"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="590dp"
+        android:layout_marginLeft="430dp"
+        android:src="@drawable/player4" />
+
+</RelativeLayout>
