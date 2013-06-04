@@ -1,12 +1,12 @@
 package com.example.diceapp;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,67 +18,43 @@ public class Game extends Activity {
 	private static int positionp3;
 	private static int positionp4;
 	
-    	@Override
+    	@SuppressLint("CutPasteId")
+		@Override
     	protected void onCreate(Bundle savedInstanceState) {
         	super.onCreate(savedInstanceState);
         	setContentView(R.layout.game);
+    		LinearLayout rla = (LinearLayout) findViewById(R.id.pRow1);
+            rla.setVisibility(View.INVISIBLE);
+            
+            LinearLayout rlb = (LinearLayout) findViewById(R.id.pRow2);
+            rlb.setVisibility(View.INVISIBLE);
+            
+            LinearLayout rlc = (LinearLayout) findViewById(R.id.pRow3);
+            rlc.setVisibility(View.INVISIBLE);
+            
+            LinearLayout rld = (LinearLayout) findViewById(R.id.pRow4);
+            rld.setVisibility(View.INVISIBLE);
         	if (Game.currentplayer == 0)
         	{
         		Game.currentplayer = 1;
         		LinearLayout rl1 = (LinearLayout) findViewById(R.id.pRow1);
                 rl1.setVisibility(View.VISIBLE);
-                
-                LinearLayout rl2 = (LinearLayout) findViewById(R.id.pRow2);
-                rl2.setVisibility(View.INVISIBLE);
-                
-                LinearLayout rl3 = (LinearLayout) findViewById(R.id.pRow3);
-                rl3.setVisibility(View.INVISIBLE);
-                
-                LinearLayout rl4 = (LinearLayout) findViewById(R.id.pRow4);
-                rl4.setVisibility(View.INVISIBLE);
         	}
         	else if (Game.currentplayer == 1)
         	{
         		Game.currentplayer = 2;
-        		LinearLayout rl1 = (LinearLayout) findViewById(R.id.pRow1);
-                rl1.setVisibility(View.INVISIBLE);
-                
                 LinearLayout rl2 = (LinearLayout) findViewById(R.id.pRow2);
                 rl2.setVisibility(View.VISIBLE);
-                
-                LinearLayout rl3 = (LinearLayout) findViewById(R.id.pRow3);
-                rl3.setVisibility(View.INVISIBLE);
-                
-                LinearLayout rl4 = (LinearLayout) findViewById(R.id.pRow4);
-                rl4.setVisibility(View.INVISIBLE);
         	}
         	else if (Game.currentplayer == 2)
         	{
         		Game.currentplayer = 3;
-        		LinearLayout rl1 = (LinearLayout) findViewById(R.id.pRow1);
-                rl1.setVisibility(View.INVISIBLE);
-                
-                LinearLayout rl2 = (LinearLayout) findViewById(R.id.pRow2);
-                rl2.setVisibility(View.INVISIBLE);
-                
                 LinearLayout rl3 = (LinearLayout) findViewById(R.id.pRow3);
                 rl3.setVisibility(View.VISIBLE);
-                
-                LinearLayout rl4 = (LinearLayout) findViewById(R.id.pRow4);
-                rl4.setVisibility(View.INVISIBLE);
         	}
         	else if (Game.currentplayer == 3)
         	{
         		Game.currentplayer = 4;
-        		LinearLayout rl1 = (LinearLayout) findViewById(R.id.pRow1);
-                rl1.setVisibility(View.INVISIBLE);
-                
-                LinearLayout rl2 = (LinearLayout) findViewById(R.id.pRow2);
-                rl2.setVisibility(View.INVISIBLE);
-                
-                LinearLayout rl3 = (LinearLayout) findViewById(R.id.pRow3);
-                rl3.setVisibility(View.INVISIBLE);
-                
                 LinearLayout rl4 = (LinearLayout) findViewById(R.id.pRow4);
                 rl4.setVisibility(View.VISIBLE);
         	}
@@ -87,15 +63,6 @@ public class Game extends Activity {
         		Game.currentplayer = 1;
         		LinearLayout rl1 = (LinearLayout) findViewById(R.id.pRow1);
                 rl1.setVisibility(View.VISIBLE);
-                
-                LinearLayout rl2 = (LinearLayout) findViewById(R.id.pRow2);
-                rl2.setVisibility(View.INVISIBLE);
-                
-                LinearLayout rl3 = (LinearLayout) findViewById(R.id.pRow3);
-                rl3.setVisibility(View.INVISIBLE);
-                
-                LinearLayout rl4 = (LinearLayout) findViewById(R.id.pRow4);
-                rl4.setVisibility(View.INVISIBLE);
         	}
         	
         	//positie p1

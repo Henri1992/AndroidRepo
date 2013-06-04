@@ -17,9 +17,11 @@ public class Connect extends Activity {
 
 	}
 	//got to Game activity
-	class ConnectHandler implements Runnable {
-		public void run() {
-			startActivity(new Intent(getApplication(), Game.class));
+	class ConnectHandler implements Runnable 
+	{
+		public void run() 
+		{
+			startActivity(new Intent(getApplication(), Lobby.class));
 			Connect.this.finish();
 		}
 	}

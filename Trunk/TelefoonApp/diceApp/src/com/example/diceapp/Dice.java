@@ -35,11 +35,14 @@ public class Dice extends Activity
 	public static int hasrolledp2;
 	public static int hasrolledp3;
 	public static int hasrolledp4;
+	
 	ImageView dice_picture;
 	SoundPool dice_sound = new SoundPool(1,AudioManager.STREAM_MUSIC,0);
 	int sound_id;
+	
 	//ispressed 0 = not-pressed  /  ispressed 1 = pressed
 	int ispressed = 0;
+	
 	//timer
 	Handler handler;
 	Timer timer=new Timer();
@@ -50,8 +53,10 @@ public class Dice extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dice);
+		
 		//play sound
 		sound_id=dice_sound.load(this,R.raw.shake_dice,1);
+		
 		//set image to rolling dice
 		dice_picture = (ImageView) findViewById(R.id.rollDice);
 		handler=new Handler(callback);
@@ -101,6 +106,10 @@ public class Dice extends Activity
 			int diceRand = randomno.nextInt(5 + 1);
 			if (ispressed == 0)
 				ispressed = 1;
+			Dice.hasrolledp1 = 0;
+			Dice.hasrolledp2 = 0;
+			Dice.hasrolledp3 = 0;
+			Dice.hasrolledp4 = 0;
 			switch(diceRand+1) 
 			{
 			//do stuff with the thrown number
@@ -110,29 +119,17 @@ public class Dice extends Activity
 				if (Game.currentplayer == 1)
 				{
 					Dice.hasrolledp1 = 1;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 2)
 				{
-					Dice.hasrolledp1 = 0;
 					Dice.hasrolledp2 = 1;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 3)
 				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
 					Dice.hasrolledp3 = 1;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 4)
 				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
 					Dice.hasrolledp4 = 1;
 				}
 				break;
@@ -142,29 +139,17 @@ public class Dice extends Activity
 				if (Game.currentplayer == 1)
 				{
 					Dice.hasrolledp1 = 2;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 2)
 				{
-					Dice.hasrolledp1 = 0;
 					Dice.hasrolledp2 = 2;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 3)
 				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
 					Dice.hasrolledp3 = 2;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 4)
 				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
 					Dice.hasrolledp4 = 2;
 				}
 				break;
@@ -174,29 +159,17 @@ public class Dice extends Activity
 				if (Game.currentplayer == 1)
 				{
 					Dice.hasrolledp1 = 3;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 2)
 				{
-					Dice.hasrolledp1 = 0;
 					Dice.hasrolledp2 = 3;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 3)
 				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
 					Dice.hasrolledp3 = 3;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 4)
 				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
 					Dice.hasrolledp4 = 3;
 				}
 				break;
@@ -206,29 +179,17 @@ public class Dice extends Activity
 				if (Game.currentplayer == 1)
 				{
 					Dice.hasrolledp1 = 4;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 2)
 				{
-					Dice.hasrolledp1 = 0;
 					Dice.hasrolledp2 = 4;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 3)
 				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
 					Dice.hasrolledp3 = 4;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 4)
 				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
 					Dice.hasrolledp4 = 4;
 				}
 				break;
@@ -238,29 +199,17 @@ public class Dice extends Activity
 				if (Game.currentplayer == 1)
 				{
 					Dice.hasrolledp1 = 5;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 2)
 				{
-					Dice.hasrolledp1 = 0;
 					Dice.hasrolledp2 = 5;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 3)
 				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
 					Dice.hasrolledp3 = 5;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 4)
 				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
 					Dice.hasrolledp4 = 5;
 				}
 				break;
@@ -270,29 +219,17 @@ public class Dice extends Activity
 				if (Game.currentplayer == 1)
 				{
 					Dice.hasrolledp1 = 6;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 2)
 				{
-					Dice.hasrolledp1 = 0;
 					Dice.hasrolledp2 = 6;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 3)
 				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
 					Dice.hasrolledp3 = 6;
-					Dice.hasrolledp4 = 0;
 				}
 				else if (Game.currentplayer == 4)
 				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
 					Dice.hasrolledp4 = 6;
 				}
 				break;
