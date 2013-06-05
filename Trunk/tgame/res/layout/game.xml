@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/menuback"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:keepScreenOn="true" >
-    
+    android:background="@drawable/menuback"
+    android:keepScreenOn="true"
+    android:orientation="vertical" >
+
     <!-- Bord -->
     <ImageView
         android:id="@+id/bord"
@@ -13,191 +13,725 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="25dp"
-        android:src="@drawable/bord" />
-    
-    <!-- Player Green -->
-    <ImageView 
-        android:id="@+id/playerGreenpion1"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginLeft="48dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/bordbg" />
+
+    <!-- Groen basis -->
+    <ImageView
+        android:id="@+id/basisg1"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="51dp"
+        android:layout_marginTop="42dp"
         android:src="@drawable/playergreenpion1" />
-    
-    <ImageView 
-        android:id="@+id/playerGreenpion2"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginLeft="85dp"
+
+    <ImageView
+        android:id="@+id/basisg2"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="89dp"
+        android:layout_marginTop="42dp"
         android:src="@drawable/playergreenpion2" />
-    
-    <ImageView 
-        android:id="@+id/playerGreenpion3"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="67dp"
-        android:layout_marginLeft="48dp"
+
+    <ImageView
+        android:id="@+id/basisg3"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="51dp"
+        android:layout_marginTop="80dp"
         android:src="@drawable/playergreenpion3" />
-    
-    <ImageView 
-        android:id="@+id/playerGreenpion4"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="67dp"
-        android:layout_marginLeft="85dp"
+
+    <ImageView
+        android:id="@+id/basisg4"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="89dp"
+        android:layout_marginTop="80dp"
         android:src="@drawable/playergreenpion4" />
     
-    <!-- Player Red -->
-    <ImageView 
-        android:id="@+id/playerRedpion1"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="27dp"
+    <!-- Rood basis -->
+    <ImageView
+        android:id="@+id/basisr1"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="468dp"
+        android:layout_marginTop="42dp"
         android:src="@drawable/playerredpion1" />
-    
-    <ImageView 
-        android:id="@+id/playerRedpion2"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginLeft="505dp"
+
+    <ImageView
+        android:id="@+id/basisr2"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="506dp"
+        android:layout_marginTop="42dp"
         android:src="@drawable/playerredpion2" />
-    
-    <ImageView 
-        android:id="@+id/playerRedpion3"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="67dp"
+
+    <ImageView
+        android:id="@+id/basisr3"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="468dp"
+        android:layout_marginTop="80dp"
         android:src="@drawable/playerredpion3" />
-    
-    <ImageView 
-        android:id="@+id/playerRedpion4"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="67dp"
-        android:layout_marginLeft="505dp"
+
+    <ImageView
+        android:id="@+id/basisr4"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="506dp"
+        android:layout_marginTop="80dp"
         android:src="@drawable/playerredpion4" />
     
-    <!-- Player Blue -->
-    <ImageView 
-        android:id="@+id/playerBluepion1"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="472dp"
-        android:layout_marginLeft="48dp"
-        android:src="@drawable/playerbluepion1" />
-    
-    <ImageView 
-        android:id="@+id/playerBluepion2"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="472dp"
-        android:layout_marginLeft="85dp"
-        android:src="@drawable/playerbluepion2" />
-    
-    <ImageView 
-        android:id="@+id/playerBluepion3"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="512dp"
-        android:layout_marginLeft="48dp"
-        android:src="@drawable/playerbluepion3" />
-    
-    <ImageView 
-        android:id="@+id/playerBluepion4"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="512dp"
-        android:layout_marginLeft="85dp"
-        android:src="@drawable/playerbluepion4" />
-    
-    <!-- Player Black -->
-    <ImageView 
-        android:id="@+id/playerBlackpion1"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="472dp"
+    <!-- Zwart basis -->
+    <ImageView
+        android:id="@+id/basisz1"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="468dp"
+        android:layout_marginTop="460dp"
         android:src="@drawable/playerblackpion1" />
-    
-    <ImageView 
-        android:id="@+id/playerBlackpion2"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="472dp"
-        android:layout_marginLeft="505dp"
+
+    <ImageView
+        android:id="@+id/basisz2"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="506dp"
+        android:layout_marginTop="460dp"
         android:src="@drawable/playerblackpion2" />
-    
-    <ImageView 
-        android:id="@+id/playerBlackpion3"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="512dp"
+
+    <ImageView
+        android:id="@+id/basisz3"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="468dp"
+        android:layout_marginTop="498dp"
         android:src="@drawable/playerblackpion3" />
-    
-    <ImageView 
-        android:id="@+id/playerBlackpion4"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="512dp"
-        android:layout_marginLeft="505dp"
+
+    <ImageView
+        android:id="@+id/basisz4"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="506dp"
+        android:layout_marginTop="498dp"
         android:src="@drawable/playerblackpion4" />
     
+    <!-- Blauw basis -->
+    <ImageView
+        android:id="@+id/basisb1"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="51dp"
+        android:layout_marginTop="460dp"
+        android:src="@drawable/playerbluepion1" />
+
+    <ImageView
+        android:id="@+id/basisb2"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="89dp"
+        android:layout_marginTop="460dp"
+        android:src="@drawable/playerbluepion2" />
+
+    <ImageView
+        android:id="@+id/basisb3"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="51dp"
+        android:layout_marginTop="498dp"
+        android:src="@drawable/playerbluepion3" />
+
+    <ImageView
+        android:id="@+id/basisb4"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="89dp"
+        android:layout_marginTop="498dp"
+        android:src="@drawable/playerbluepion4" />
+
+    <!-- Groen -->
+    <ImageView
+        android:id="@+id/veld1"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="51dp"
+        android:layout_marginTop="194dp"
+        android:src="@drawable/veldgroen" />
+
+    <ImageView
+        android:id="@+id/veld2"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="89dp"
+        android:layout_marginTop="194dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld3"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="127dp"
+        android:layout_marginTop="194dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld4"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="165dp"
+        android:layout_marginTop="194dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld5"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="202dp"
+        android:layout_marginTop="194dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld6"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="202dp"
+        android:layout_marginTop="156dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld7"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="202dp"
+        android:layout_marginTop="118dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld8"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="202dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld9"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="202dp"
+        android:layout_marginTop="42dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld10"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="42dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld11"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="278dp"
+        android:layout_marginTop="42dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld12"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="316dp"
+        android:layout_marginTop="42dp"
+        android:src="@drawable/veldwit" />
+
+    <!-- Rood -->
+    <ImageView
+        android:id="@+id/veld13"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="354dp"
+        android:layout_marginTop="42dp"
+        android:src="@drawable/veldrood" />
+
+    <ImageView
+        android:id="@+id/veld14"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="354dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld15"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="354dp"
+        android:layout_marginTop="118dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld16"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="354dp"
+        android:layout_marginTop="156dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld17"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="354dp"
+        android:layout_marginTop="194dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld18"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="392dp"
+        android:layout_marginTop="194dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld19"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="430dp"
+        android:layout_marginTop="194dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld20"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="468dp"
+        android:layout_marginTop="194dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld21"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="506dp"
+        android:layout_marginTop="194dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld22"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="506dp"
+        android:layout_marginTop="194dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld23"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="506dp"
+        android:layout_marginTop="232dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld24"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="506dp"
+        android:layout_marginTop="270dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld25"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="506dp"
+        android:layout_marginTop="308dp"
+        android:src="@drawable/veldwit" />
+
+    <!-- Zwart -->
+
+    <ImageView
+        android:id="@+id/veld26"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="506dp"
+        android:layout_marginTop="346dp"
+        android:src="@drawable/veldzwart" />
+
+    <ImageView
+        android:id="@+id/veld27"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="468dp"
+        android:layout_marginTop="346dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld28"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="430dp"
+        android:layout_marginTop="346dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld29"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="392dp"
+        android:layout_marginTop="346dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld30"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="354dp"
+        android:layout_marginTop="346dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld31"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="354dp"
+        android:layout_marginTop="384dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld32"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="354dp"
+        android:layout_marginTop="422dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld33"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="354dp"
+        android:layout_marginTop="460dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld34"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="354dp"
+        android:layout_marginTop="498dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld35"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="316dp"
+        android:layout_marginTop="498dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld36"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="278dp"
+        android:layout_marginTop="498dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld37"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="498dp"
+        android:src="@drawable/veldwit" />
+
+    <!-- Blauw -->
+
+    <ImageView
+        android:id="@+id/veld38"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="202dp"
+        android:layout_marginTop="498dp"
+        android:src="@drawable/veldblauw" />
+
+    <ImageView
+        android:id="@+id/veld39"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="202dp"
+        android:layout_marginTop="460dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld40"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="202dp"
+        android:layout_marginTop="422dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld41"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="202dp"
+        android:layout_marginTop="384dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld42"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="202dp"
+        android:layout_marginTop="346dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld43"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="164dp"
+        android:layout_marginTop="346dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld44"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="126dp"
+        android:layout_marginTop="346dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld45"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="88dp"
+        android:layout_marginTop="346dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld46"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="346dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld47"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="308dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld48"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="270dp"
+        android:src="@drawable/veldwit" />
+
+    <ImageView
+        android:id="@+id/veld49"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="232dp"
+        android:src="@drawable/veldwit" />
+
     <!-- Player aanwijzer -->
-    
+
     <ImageView
         android:id="@+id/player1"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="730dp"
         android:layout_marginLeft="260dp"
+        android:layout_marginTop="730dp"
         android:src="@drawable/player1" />
-    
+
     <ImageView
         android:id="@+id/player2"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="590dp"
         android:layout_marginLeft="260dp"
+        android:layout_marginTop="590dp"
         android:src="@drawable/player2" />
-    
+
     <ImageView
         android:id="@+id/player3"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="730dp"
         android:layout_marginLeft="430dp"
+        android:layout_marginTop="730dp"
         android:src="@drawable/player3" />
-    
+
     <ImageView
         android:id="@+id/player4"
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="590dp"
         android:layout_marginLeft="430dp"
+        android:layout_marginTop="590dp"
         android:src="@drawable/player4" />
-    
+
     <!-- Beurten dialog -->
+
     <TextView
         android:id="@+id/TextView_R"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="590dp"
-        android:layout_marginLeft="50dp" />
+        android:layout_width="242dp"
+        android:layout_height="200dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="624dp"
+        android:background="@drawable/white"
+        android:rotation="-90"
+        android:shadowColor="#000000"
+        android:shadowRadius="2"
+        android:textColor="#000000" />
 
 </RelativeLayout>
