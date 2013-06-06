@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +17,6 @@ public class Game extends Activity {
 
 	//zet welke speler dit speelt (dit is een dummy waarde)
 	protected static int thisplayer = 1;
-
 
 	//Hier worden de posities van de pionen opgeslagen, dit wordt later via de server geregeld.
 	private static int positionp1;
@@ -41,44 +39,53 @@ public class Game extends Activity {
 			Toast.makeText(getApplicationContext(), "Please, wait for your turn to roll.", Toast.LENGTH_SHORT).show();
 		}
 
-
 		//roll
-		Button roll = (Button) findViewById(R.id.button_roll);
-		roll.setOnClickListener(new OnClickListener()
+		final ImageView rollButton = (ImageView) findViewById(R.id.imageRoll);
+		rollButton.setOnClickListener(new OnClickListener()
 		{
 			@Override
 			public void onClick(View v)
 			{
-				startActivity(new Intent(getApplication(), Dice.class));
-				Game.this.finish();
+				if (hasbeenrolled == 0)
+				{
+					startActivity(new Intent(getApplication(), Dice.class));
+					Game.this.finish();
+				}
 			}
 		});
+		if (hasbeenrolled == 0)
+		{
+			rollButton.setImageResource(R.drawable.rollbuttongreen);
+		}
+		else if (hasbeenrolled == 1)
+		{
+			rollButton.setImageResource(R.drawable.rollbuttonred);
+		}
+
 		//posities weergeven
 		TextView pos1View = (TextView)findViewById(R.id.p1pos);
 		pos1View.setText("Pion 1 position: " + Game.positionp1);
-		
+
 		TextView pos2View = (TextView)findViewById(R.id.p2pos);
 		pos2View.setText("Pion 2 position: " + Game.positionp2);
-		
+
 		TextView pos3View = (TextView)findViewById(R.id.p3pos);
 		pos3View.setText("Pion 3 position: " + Game.positionp3);
-		
+
 		TextView pos4View = (TextView)findViewById(R.id.p4pos);
 		pos4View.setText("Pion 4 position: " + Game.positionp4);
 
-		//zoek plaatjes van de pionen
+		//zoek plaatjes van de pionnen
 		final ImageView imgPion1 = (ImageView) findViewById(R.id.pion1);
 		final ImageView imgPion2 = (ImageView) findViewById(R.id.pion2);
 		final ImageView imgPion3 = (ImageView) findViewById(R.id.pion3);
 		final ImageView imgPion4 = (ImageView) findViewById(R.id.pion4);
 
 		//Zet plaatjes aan de hand van de posities
-
-		//Alle pionen boven de positie 0 zitten in het veld
+		//Alle pionnen boven de positie 0 zitten in het veld
 		//de waarde 0 is een dummy
-		if ((Game.positionp1 > 0)&&(Game.currentplayer == Game.thisplayer))
-		{
-			if (Game.thisplayer == 1)			{
+		if (Game.positionp1 > 0){
+			if (Game.thisplayer == 1){
 				imgPion1.setImageResource(R.drawable.piongroenveld1);
 			}
 			else if (Game.thisplayer == 2){
@@ -91,8 +98,7 @@ public class Game extends Activity {
 				imgPion1.setImageResource(R.drawable.pionblauwveld1);
 			}
 		}
-		else if ((Game.positionp2 > 0)&&(Game.currentplayer == Game.thisplayer))
-		{
+		if (Game.positionp2 > 0){
 			if (Game.thisplayer == 1){
 				imgPion2.setImageResource(R.drawable.piongroenveld2);
 			}
@@ -106,8 +112,7 @@ public class Game extends Activity {
 				imgPion2.setImageResource(R.drawable.pionblauwveld2);
 			}			
 		}
-		else if ((Game.positionp3 > 0)&&(Game.currentplayer == Game.thisplayer))
-		{
+		if (Game.positionp3 > 0){
 			if (Game.thisplayer == 1){
 				imgPion3.setImageResource(R.drawable.piongroenveld3);
 			}
@@ -121,8 +126,7 @@ public class Game extends Activity {
 				imgPion3.setImageResource(R.drawable.pionblauwveld3);
 			}			
 		}
-		else if ((Game.positionp4 > 0)&&(Game.currentplayer == Game.thisplayer))
-		{
+		if (Game.positionp4 > 0){
 			if (Game.thisplayer == 1){
 				imgPion4.setImageResource(R.drawable.piongroenveld4);
 			}
@@ -139,8 +143,7 @@ public class Game extends Activity {
 
 		//Alle pionen boven de positie 20 zitten in de finish
 		//De waarde 20 is een dummy getal
-		if ((Game.positionp1 > 20)&&(Game.currentplayer == Game.thisplayer))
-		{
+		if (Game.positionp1 >= 20){
 			if (Game.thisplayer == 1){
 				imgPion1.setImageResource(R.drawable.piongroenfinish1);
 			}
@@ -154,8 +157,7 @@ public class Game extends Activity {
 				imgPion1.setImageResource(R.drawable.pionblauwfinish1);
 			}
 		}
-		else if ((Game.positionp2 > 20)&&(Game.currentplayer == Game.thisplayer))
-		{
+		if (Game.positionp2 >= 20){
 			if (Game.thisplayer == 1){
 				imgPion2.setImageResource(R.drawable.piongroenfinish2);
 			}
@@ -169,8 +171,7 @@ public class Game extends Activity {
 				imgPion2.setImageResource(R.drawable.pionblauwfinish2);
 			}			
 		}
-		else if ((Game.positionp3 > 20)&&(Game.currentplayer == Game.thisplayer))
-		{
+		if (Game.positionp3 >= 20){
 			if (Game.thisplayer == 1){
 				imgPion3.setImageResource(R.drawable.piongroenfinish3);
 			}
@@ -184,8 +185,7 @@ public class Game extends Activity {
 				imgPion3.setImageResource(R.drawable.pionblauwfinish3);
 			}			
 		}
-		else if ((Game.positionp4 > 20)&&(Game.currentplayer == Game.thisplayer))
-		{
+		if (Game.positionp4 >= 20){
 			if (Game.thisplayer == 1){
 				imgPion4.setImageResource(R.drawable.piongroenfinish4);
 			}
@@ -209,7 +209,7 @@ public class Game extends Activity {
 
 
 		//selecteer pion (onclicklisteners)
-		
+
 		//Selecteer pion 1
 		ImageView slcPion1 = (ImageView) findViewById(R.id.pion1);
 		slcPion1.setOnClickListener(new OnClickListener() 
@@ -299,11 +299,12 @@ public class Game extends Activity {
 					Game.positionp1 = Game.positionp1 + Dice.hasrolled;
 					TextView pos1View = (TextView)findViewById(R.id.p1pos);
 					pos1View.setText("Pion 1 position: " + Game.positionp1);
+					rollButton.setImageResource(R.drawable.rollbuttongreen);
 				}
-					
+
 			}
 		});
-		
+
 		/*
 		 * einde pion 1 selectie
 		 * ************************
@@ -311,7 +312,7 @@ public class Game extends Activity {
 		 * ************************
 		 * begin pion 2 selectie
 		 */
-		
+
 		//Selecteer pion 2
 		ImageView slcPion2 = (ImageView) findViewById(R.id.pion2);
 		slcPion2.setOnClickListener(new OnClickListener() 
@@ -401,10 +402,11 @@ public class Game extends Activity {
 					Game.positionp2 = Game.positionp2 + Dice.hasrolled;
 					TextView pos2View = (TextView)findViewById(R.id.p2pos);
 					pos2View.setText("Pion 2 position: " + Game.positionp2);
+					rollButton.setImageResource(R.drawable.rollbuttongreen);
 				}
 			}
 		});
-		
+
 		/*
 		 * einde pion 2 selectie
 		 * ************************
@@ -412,7 +414,7 @@ public class Game extends Activity {
 		 * ************************
 		 * begin pion 3 selectie
 		 */
-		
+
 		//Selecteer pion 3
 		ImageView slcPion3 = (ImageView) findViewById(R.id.pion3);
 		slcPion3.setOnClickListener(new OnClickListener() 
@@ -502,10 +504,11 @@ public class Game extends Activity {
 					Game.positionp3 = Game.positionp3 + Dice.hasrolled;
 					TextView pos3View = (TextView)findViewById(R.id.p3pos);
 					pos3View.setText("Pion 3 position: " + Game.positionp3);
+					rollButton.setImageResource(R.drawable.rollbuttongreen);
 				}
 			}
 		});
-		
+
 		/*
 		 * einde pion 3 selectie
 		 * ************************
@@ -513,7 +516,7 @@ public class Game extends Activity {
 		 * ************************
 		 * begin pion 4 selectie
 		 */
-		
+
 		//Selecteer pion 4
 		ImageView slcPion4 = (ImageView) findViewById(R.id.pion4);
 		slcPion4.setOnClickListener(new OnClickListener() 
@@ -603,6 +606,7 @@ public class Game extends Activity {
 					Game.positionp4 = Game.positionp4 + Dice.hasrolled;
 					TextView pos4View = (TextView)findViewById(R.id.p4pos);
 					pos4View.setText("Pion 4 position: " + Game.positionp4);
+					rollButton.setImageResource(R.drawable.rollbuttongreen);
 				}
 			}
 		});

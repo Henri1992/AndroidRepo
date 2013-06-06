@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/backmobiel"
+    android:background="@drawable/menubackmobiel"
     android:orientation="horizontal" >
 
     <TableLayout
@@ -13,7 +13,7 @@
             android:id="@+id/tableRow2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp" >
+            android:layout_marginTop="150dp" >
 
             <ImageView
                 android:id="@+id/pion1"
@@ -51,13 +51,11 @@
                 android:src="@drawable/pionleeg4" />
         </TableRow>
 
-        <Button
-            android:id="@+id/button_roll"
+        <ImageView
+            android:id="@+id/imageRoll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="200dp"
-            android:text="Roll" />
+            android:src="@drawable/rollbuttonred" />
 
         <TextView
             android:id="@+id/p1pos"
