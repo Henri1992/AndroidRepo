@@ -227,69 +227,21 @@ public class Game extends Activity {
 					if (thisplayer == 1){
 						//ZET P1 SELECTIE
 						imgPion1.setImageResource(R.drawable.piongroenveld1select);
-						//RESET P2
-						if (positionp2 == 0){imgPion2.setImageResource(R.drawable.pionleeg2);}
-						else if (positionp2 >= 20){imgPion2.setImageResource(R.drawable.piongroenfinish2);}
-						else {imgPion2.setImageResource(R.drawable.piongroenveld2);}
-						//RESET P3
-						if (positionp3 == 0){imgPion3.setImageResource(R.drawable.pionleeg3);}
-						else if (positionp3 >= 20){imgPion3.setImageResource(R.drawable.piongroenfinish3);}
-						else {imgPion3.setImageResource(R.drawable.piongroenveld3);}
-						//RESET P4
-						if (positionp4 == 0){imgPion4.setImageResource(R.drawable.pionleeg4);}
-						else if (positionp4 >= 20){imgPion4.setImageResource(R.drawable.piongroenfinish4);}
-						else {imgPion4.setImageResource(R.drawable.piongroenveld4);}
 					}
 					//WANNEER DE SPELER NUMMER 2 IS
 					else if(thisplayer == 2){
 						//ZET P1 SELECTIE
 						imgPion1.setImageResource(R.drawable.pionroodveld1select);
-						//RESET P2
-						if (positionp2 == 0){imgPion2.setImageResource(R.drawable.pionleeg2);}
-						else if (positionp2 >= 20){imgPion2.setImageResource(R.drawable.pionroodfinish2);}
-						else {imgPion2.setImageResource(R.drawable.pionroodveld2);}
-						//RESET P3
-						if (positionp3 == 0){imgPion3.setImageResource(R.drawable.pionleeg3);}
-						else if (positionp3 >= 20){imgPion3.setImageResource(R.drawable.pionroodfinish3);}
-						else {imgPion3.setImageResource(R.drawable.pionroodveld3);}
-						//RESET P4
-						if (positionp4 == 0){imgPion4.setImageResource(R.drawable.pionleeg4);}
-						else if (positionp4 >= 20){imgPion4.setImageResource(R.drawable.pionroodfinish4);}
-						else {imgPion4.setImageResource(R.drawable.pionroodveld4);}
 					}
 					//WANNEER DE SPELER NUMMER 3 IS
 					else if (thisplayer == 3){
 						//ZET P1 SELECTIE
 						imgPion1.setImageResource(R.drawable.pionzwartveld1select);
-						//RESET P2
-						if (positionp2 == 0){imgPion2.setImageResource(R.drawable.pionleeg2);}
-						else if (positionp2 >= 20){imgPion2.setImageResource(R.drawable.pionzwartfinish2);}
-						else {imgPion2.setImageResource(R.drawable.pionzwartveld2);}
-						//RESET P3
-						if (positionp3 == 0){imgPion3.setImageResource(R.drawable.pionleeg3);}
-						else if (positionp3 >= 20){imgPion3.setImageResource(R.drawable.pionzwartfinish3);}
-						else {imgPion3.setImageResource(R.drawable.pionzwartveld3);}
-						//RESET P4
-						if (positionp4 == 0){imgPion4.setImageResource(R.drawable.pionleeg4);}
-						else if (positionp4 >= 20){imgPion4.setImageResource(R.drawable.pionzwartfinish4);}
-						else {imgPion4.setImageResource(R.drawable.pionzwartveld4);}
 					}
 					//WANNEER DE SPELER NUMMER 4 IS
 					else if (thisplayer == 4){
 						//ZET P1 SELECTIE
 						imgPion1.setImageResource(R.drawable.pionblauwveld1select);
-						//RESET P2
-						if (positionp2 == 0){imgPion2.setImageResource(R.drawable.pionleeg2);}
-						else if (positionp2 >= 20){imgPion2.setImageResource(R.drawable.pionblauwfinish2);}
-						else {imgPion2.setImageResource(R.drawable.pionblauwveld2);}
-						//RESET P3
-						if (positionp3 == 0){imgPion3.setImageResource(R.drawable.pionleeg3);}
-						else if (positionp3 >= 20){imgPion3.setImageResource(R.drawable.pionblauwfinish3);}
-						else {imgPion3.setImageResource(R.drawable.pionblauwveld3);}
-						//RESET P4
-						if (positionp4 == 0){imgPion4.setImageResource(R.drawable.pionleeg4);}
-						else if (positionp4 >= 20){imgPion4.setImageResource(R.drawable.pionblauwfinish4);}
-						else {imgPion4.setImageResource(R.drawable.pionblauwveld4);}
 					}
 					positionp1 = positionp1 + Dice.hasrolled;
 					//reset dice waarde
@@ -301,7 +253,6 @@ public class Game extends Activity {
 					pos1View.setText("Pion 1 position: " + Game.positionp1);
 					rollButton.setImageResource(R.drawable.rollbuttongreen);
 				}
-
 			}
 		});
 
@@ -328,71 +279,23 @@ public class Game extends Activity {
 				{
 					//WANNEER DE SPELER NUMMER 1 IS
 					if (thisplayer == 1){						
-						//ZET P1 SELECTIE
-						if (positionp1 == 0){imgPion1.setImageResource(R.drawable.pionleeg1);}
-						else if (positionp1 >= 20){imgPion1.setImageResource(R.drawable.piongroenfinish1);}
-						else {imgPion1.setImageResource(R.drawable.piongroenveld1);}
 						//RESET P2
 						imgPion2.setImageResource(R.drawable.piongroenveld2select);
-						//RESET P3
-						if (positionp3 == 0){imgPion3.setImageResource(R.drawable.pionleeg3);}
-						else if (positionp3 >= 20){imgPion3.setImageResource(R.drawable.piongroenfinish3);}
-						else {imgPion3.setImageResource(R.drawable.piongroenveld3);}
-						//RESET P4
-						if (positionp4 == 0){imgPion4.setImageResource(R.drawable.pionleeg4);}
-						else if (positionp4 >= 20){imgPion4.setImageResource(R.drawable.piongroenfinish4);}
-						else {imgPion4.setImageResource(R.drawable.piongroenveld4);}
 					}
 					//WANNEER DE SPELER NUMMER 2 IS
 					else if(thisplayer == 2){
-						//ZET P1 SELECTIE
-						if (positionp1 == 0){imgPion1.setImageResource(R.drawable.pionleeg1);}
-						else if (positionp1 >= 20){imgPion1.setImageResource(R.drawable.pionroodfinish1);}
-						else {imgPion1.setImageResource(R.drawable.pionroodveld1);}
 						//RESET P2
 						imgPion2.setImageResource(R.drawable.pionroodveld2select);
-						//RESET P3
-						if (positionp3 == 0){imgPion3.setImageResource(R.drawable.pionleeg3);}
-						else if (positionp3 >= 20){imgPion3.setImageResource(R.drawable.pionroodfinish3);}
-						else {imgPion3.setImageResource(R.drawable.pionroodveld3);}
-						//RESET P4
-						if (positionp4 == 0){imgPion4.setImageResource(R.drawable.pionleeg4);}
-						else if (positionp4 >= 20){imgPion4.setImageResource(R.drawable.pionroodfinish4);}
-						else {imgPion4.setImageResource(R.drawable.pionroodveld4);}
 					}
 					//WANNEER DE SPELER NUMMER 3 IS
 					else if (thisplayer == 3){
-						//ZET P1 SELECTIE
-						if (positionp1 == 0){imgPion1.setImageResource(R.drawable.pionleeg1);}
-						else if (positionp1 >= 20){imgPion1.setImageResource(R.drawable.pionzwartfinish1);}
-						else {imgPion1.setImageResource(R.drawable.pionzwartveld1);}
 						//RESET P2
 						imgPion2.setImageResource(R.drawable.pionzwartveld2select);
-						//RESET P3
-						if (positionp3 == 0){imgPion3.setImageResource(R.drawable.pionleeg3);}
-						else if (positionp3 >= 20){imgPion3.setImageResource(R.drawable.pionzwartfinish3);}
-						else {imgPion3.setImageResource(R.drawable.pionzwartveld3);}
-						//RESET P4
-						if (positionp4 == 0){imgPion4.setImageResource(R.drawable.pionleeg4);}
-						else if (positionp4 >= 20){imgPion4.setImageResource(R.drawable.pionzwartfinish4);}
-						else {imgPion4.setImageResource(R.drawable.pionzwartveld4);}
 					}
 					//WANNEER DE SPELER NUMMER 4 IS
 					else if (thisplayer == 4){
-						//ZET P1 SELECTIE
-						if (positionp1 == 0){imgPion1.setImageResource(R.drawable.pionleeg1);}
-						else if (positionp1 >= 20){imgPion1.setImageResource(R.drawable.pionblauwfinish1);}
-						else {imgPion1.setImageResource(R.drawable.pionblauwveld1);}
-						//RESET P2
+						//ZET P2 SELECTIE
 						imgPion2.setImageResource(R.drawable.pionblauwveld2select);
-						//RESET P3
-						if (positionp3 == 0){imgPion3.setImageResource(R.drawable.pionleeg3);}
-						else if (positionp3 >= 20){imgPion3.setImageResource(R.drawable.pionblauwfinish3);}
-						else {imgPion3.setImageResource(R.drawable.pionblauwveld3);}
-						//RESET P4
-						if (positionp4 == 0){imgPion4.setImageResource(R.drawable.pionleeg4);}
-						else if (positionp4 >= 20){imgPion4.setImageResource(R.drawable.pionblauwfinish4);}
-						else {imgPion4.setImageResource(R.drawable.pionblauwveld4);}
 					}
 					positionp2 = positionp2 + Dice.hasrolled;
 					//reset dice waarde
@@ -429,72 +332,24 @@ public class Game extends Activity {
 				else if ((positionp3 < 20)&&(hasbeenrolled == 1))
 				{
 					//WANNEER DE SPELER NUMMER 1 IS
-					if (thisplayer == 1){						
-						//ZET P1 SELECTIE
-						if (positionp1 == 0){imgPion1.setImageResource(R.drawable.pionleeg1);}
-						else if (positionp1 >= 20){imgPion1.setImageResource(R.drawable.piongroenfinish1);}
-						else {imgPion1.setImageResource(R.drawable.piongroenveld1);}
-						//RESET P2
-						if (positionp2 == 0){imgPion2.setImageResource(R.drawable.pionleeg2);}
-						else if (positionp2 >= 20){imgPion2.setImageResource(R.drawable.piongroenfinish2);}
-						else {imgPion2.setImageResource(R.drawable.piongroenveld2);}						
-						//RESET P3
+					if (thisplayer == 1){												
+						//RESET P3 SELECTIE
 						imgPion3.setImageResource(R.drawable.piongroenveld3select);
-						//RESET P4
-						if (positionp4 == 0){imgPion4.setImageResource(R.drawable.pionleeg4);}
-						else if (positionp4 >= 20){imgPion4.setImageResource(R.drawable.piongroenfinish4);}
-						else {imgPion4.setImageResource(R.drawable.piongroenveld4);}
 					}
 					//WANNEER DE SPELER NUMMER 2 IS
-					else if(thisplayer == 2){
-						//ZET P1 SELECTIE
-						if (positionp1 == 0){imgPion1.setImageResource(R.drawable.pionleeg1);}
-						else if (positionp1 >= 20){imgPion1.setImageResource(R.drawable.pionroodfinish1);}
-						else {imgPion1.setImageResource(R.drawable.pionroodveld1);}
-						//RESET P2
-						if (positionp2 == 0){imgPion2.setImageResource(R.drawable.pionleeg2);}
-						else if (positionp2 >= 20){imgPion2.setImageResource(R.drawable.pionroodfinish2);}
-						else {imgPion2.setImageResource(R.drawable.pionroodveld2);}						
-						//RESET P3
+					else if(thisplayer == 2){					
+						//RESET P3 SELECTIE
 						imgPion3.setImageResource(R.drawable.pionroodveld3select);
-						//RESET P4
-						if (positionp4 == 0){imgPion4.setImageResource(R.drawable.pionleeg4);}
-						else if (positionp4 >= 20){imgPion4.setImageResource(R.drawable.pionroodfinish4);}
-						else {imgPion4.setImageResource(R.drawable.pionroodveld4);}
 					}
 					//WANNEER DE SPELER NUMMER 3 IS
-					else if (thisplayer == 3){
-						//ZET P1 SELECTIE
-						if (positionp1 == 0){imgPion1.setImageResource(R.drawable.pionleeg1);}
-						else if (positionp1 >= 20){imgPion1.setImageResource(R.drawable.pionzwartfinish1);}
-						else {imgPion1.setImageResource(R.drawable.pionzwartveld1);}
-						//RESET P2
-						if (positionp2 == 0){imgPion2.setImageResource(R.drawable.pionleeg2);}
-						else if (positionp2 >= 20){imgPion2.setImageResource(R.drawable.pionzwartfinish2);}
-						else {imgPion2.setImageResource(R.drawable.pionzwartveld2);}						
-						//RESET P3
+					else if (thisplayer == 3){						
+						//RESET P3 SELECTIE
 						imgPion3.setImageResource(R.drawable.pionzwartveld3select);
-						//RESET P4
-						if (positionp4 == 0){imgPion4.setImageResource(R.drawable.pionleeg4);}
-						else if (positionp4 >= 20){imgPion4.setImageResource(R.drawable.pionzwartfinish4);}
-						else {imgPion4.setImageResource(R.drawable.pionzwartveld4);}
 					}
 					//WANNEER DE SPELER NUMMER 4 IS
-					else if (thisplayer == 4){
-						//ZET P1 SELECTIE
-						if (positionp1 == 0){imgPion1.setImageResource(R.drawable.pionleeg1);}
-						else if (positionp1 >= 20){imgPion1.setImageResource(R.drawable.pionblauwfinish1);}
-						else {imgPion1.setImageResource(R.drawable.pionblauwveld1);}
-						//RESET P2
-						if (positionp2 == 0){imgPion2.setImageResource(R.drawable.pionleeg2);}
-						else if (positionp2 >= 20){imgPion2.setImageResource(R.drawable.pionblauwfinish2);}
-						else {imgPion2.setImageResource(R.drawable.pionblauwveld2);}						
-						//RESET P3
+					else if (thisplayer == 4){						
+						//RESET P3 SELECTIE
 						imgPion3.setImageResource(R.drawable.pionblauwveld3select);
-						//RESET P4
-						if (positionp4 == 0){imgPion4.setImageResource(R.drawable.pionleeg4);}
-						else if (positionp4 >= 20){imgPion4.setImageResource(R.drawable.pionblauwfinish4);}
-						else {imgPion4.setImageResource(R.drawable.pionblauwveld4);}
 					}
 					positionp3 = positionp3 + Dice.hasrolled;
 					//reset dice waarde
@@ -532,70 +387,22 @@ public class Game extends Activity {
 				{
 					//WANNEER DE SPELER NUMMER 1 IS
 					if (thisplayer == 1){						
-						//ZET P1 SELECTIE
-						if (positionp1 == 0){imgPion1.setImageResource(R.drawable.pionleeg1);}
-						else if (positionp1 >= 20){imgPion1.setImageResource(R.drawable.piongroenfinish1);}
-						else {imgPion1.setImageResource(R.drawable.piongroenveld1);}
-						//RESET P2
-						if (positionp2 == 0){imgPion2.setImageResource(R.drawable.pionleeg2);}
-						else if (positionp2 >= 20){imgPion2.setImageResource(R.drawable.piongroenfinish2);}
-						else {imgPion2.setImageResource(R.drawable.piongroenveld2);}						
-						//RESET P3
-						if (positionp3 == 0){imgPion3.setImageResource(R.drawable.pionleeg3);}
-						else if (positionp3 >= 20){imgPion3.setImageResource(R.drawable.piongroenfinish3);}
-						else {imgPion3.setImageResource(R.drawable.piongroenveld3);}
-						//RESET P4
+						//RESET P4 SELECTIE
 						imgPion4.setImageResource(R.drawable.piongroenveld4select);
 					}
 					//WANNEER DE SPELER NUMMER 2 IS
 					else if(thisplayer == 2){
-						//ZET P1 SELECTIE
-						if (positionp1 == 0){imgPion1.setImageResource(R.drawable.pionleeg1);}
-						else if (positionp1 >= 20){imgPion1.setImageResource(R.drawable.pionroodfinish1);}
-						else {imgPion1.setImageResource(R.drawable.pionroodveld1);}
-						//RESET P2
-						if (positionp2 == 0){imgPion2.setImageResource(R.drawable.pionleeg2);}
-						else if (positionp2 >= 20){imgPion2.setImageResource(R.drawable.pionroodfinish2);}
-						else {imgPion2.setImageResource(R.drawable.pionroodveld2);}						
-						//RESET P3
-						if (positionp3 == 0){imgPion3.setImageResource(R.drawable.pionleeg3);}
-						else if (positionp3 >= 20){imgPion3.setImageResource(R.drawable.pionroodfinish3);}
-						else {imgPion3.setImageResource(R.drawable.pionroodveld3);}
-						//RESET P4
+						//RESET P4 SELECTIE
 						imgPion4.setImageResource(R.drawable.pionroodveld4select);
 					}
 					//WANNEER DE SPELER NUMMER 3 IS
 					else if (thisplayer == 3){
-						//ZET P1 SELECTIE
-						if (positionp1 == 0){imgPion1.setImageResource(R.drawable.pionleeg1);}
-						else if (positionp1 >= 20){imgPion1.setImageResource(R.drawable.pionzwartfinish1);}
-						else {imgPion1.setImageResource(R.drawable.pionzwartveld1);}
-						//RESET P2
-						if (positionp2 == 0){imgPion2.setImageResource(R.drawable.pionleeg2);}
-						else if (positionp2 >= 20){imgPion2.setImageResource(R.drawable.pionzwartfinish2);}
-						else {imgPion2.setImageResource(R.drawable.pionzwartveld2);}						
-						//RESET P3
-						if (positionp3 == 0){imgPion3.setImageResource(R.drawable.pionleeg3);}
-						else if (positionp3 >= 20){imgPion3.setImageResource(R.drawable.pionzwartfinish3);}
-						else {imgPion3.setImageResource(R.drawable.pionzwartveld3);}
-						//RESET P4
+						//RESET P4 SELECTIE
 						imgPion4.setImageResource(R.drawable.pionzwartveld4select);
 					}
 					//WANNEER DE SPELER NUMMER 4 IS
 					else if (thisplayer == 4){
-						//ZET P1 SELECTIE
-						if (positionp1 == 0){imgPion1.setImageResource(R.drawable.pionleeg1);}
-						else if (positionp1 >= 20){imgPion1.setImageResource(R.drawable.pionblauwfinish1);}
-						else {imgPion1.setImageResource(R.drawable.pionblauwveld1);}
-						//RESET P2
-						if (positionp2 == 0){imgPion2.setImageResource(R.drawable.pionleeg2);}
-						else if (positionp2 >= 20){imgPion2.setImageResource(R.drawable.pionblauwfinish2);}
-						else {imgPion2.setImageResource(R.drawable.pionblauwveld2);}						
-						//RESET P3
-						if (positionp3 == 0){imgPion3.setImageResource(R.drawable.pionleeg3);}
-						else if (positionp3 >= 20){imgPion3.setImageResource(R.drawable.pionblauwfinish3);}
-						else {imgPion3.setImageResource(R.drawable.pionblauwveld3);}
-						//RESET P4
+						//RESET P4 SELECTIE
 						imgPion4.setImageResource(R.drawable.pionblauwveld4select);
 					}
 					positionp4 = positionp4 + Dice.hasrolled;
