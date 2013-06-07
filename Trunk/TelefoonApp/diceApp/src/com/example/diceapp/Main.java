@@ -22,7 +22,7 @@ public class Main extends Activity {
 			@Override
 			public void onClick(View v) 
 		    {
-		    	Intent intent = new Intent(v.getContext(), Login.class);
+		    	Intent intent = new Intent(v.getContext(), Connect.class);
 				startActivityForResult(intent, 0);
 		    }
 		});

@@ -21,7 +21,7 @@ public class Connect extends Activity {
 	{
 		public void run() 
 		{
-			startActivity(new Intent(getApplication(), Lobby.class));
+			startActivity(new Intent(getApplication(), Game.class));
 			Connect.this.finish();
 		}
 	}

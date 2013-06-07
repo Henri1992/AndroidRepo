@@ -34,8 +34,6 @@
         <activity android:label = "@string/app_name" android:name = ".Howto1" android:screenOrientation="portrait"></activity>
         <activity android:label = "@string/app_name" android:name = ".Howto2" android:screenOrientation="portrait"></activity>
         <activity android:label = "@string/app_name" android:name = ".Howto3" android:screenOrientation="portrait"></activity>
-        <activity android:label = "@string/app_name" android:name = ".Login" android:screenOrientation="portrait"></activity>
-        <activity android:label = "@string/app_name" android:name = ".Lobby" android:screenOrientation="portrait"></activity>
         
     </application>
 
