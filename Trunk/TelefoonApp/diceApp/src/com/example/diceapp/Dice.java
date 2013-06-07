@@ -31,10 +31,6 @@ public class Dice extends Activity
 	private static final String URL_W = "http://techniek.server-ict.nl:20824/Service.asmx";
 	
 	public static int hasrolled;
-	public static int hasrolledp1;
-	public static int hasrolledp2;
-	public static int hasrolledp3;
-	public static int hasrolledp4;
 	
 	ImageView dice_picture;
 	SoundPool dice_sound = new SoundPool(1,AudioManager.STREAM_MUSIC,0);
@@ -106,132 +102,33 @@ public class Dice extends Activity
 			int diceRand = randomno.nextInt(5 + 1);
 			if (ispressed == 0)
 				ispressed = 1;
-			Dice.hasrolledp1 = 0;
-			Dice.hasrolledp2 = 0;
-			Dice.hasrolledp3 = 0;
-			Dice.hasrolledp4 = 0;
+				Game.hasbeenrolled = 1;
 			switch(diceRand+1) 
 			{
 			//do stuff with the thrown number
 			case 1:
 				dice_picture.setImageResource(R.drawable.one);
 				Dice.hasrolled = 1;
-				if (Game.currentplayer == 1)
-				{
-					Dice.hasrolledp1 = 1;
-				}
-				else if (Game.currentplayer == 2)
-				{
-					Dice.hasrolledp2 = 1;
-				}
-				else if (Game.currentplayer == 3)
-				{
-					Dice.hasrolledp3 = 1;
-				}
-				else if (Game.currentplayer == 4)
-				{
-					Dice.hasrolledp4 = 1;
-				}
 				break;
 			case 2:
 				dice_picture.setImageResource(R.drawable.two);
 				Dice.hasrolled = 2;
-				if (Game.currentplayer == 1)
-				{
-					Dice.hasrolledp1 = 2;
-				}
-				else if (Game.currentplayer == 2)
-				{
-					Dice.hasrolledp2 = 2;
-				}
-				else if (Game.currentplayer == 3)
-				{
-					Dice.hasrolledp3 = 2;
-				}
-				else if (Game.currentplayer == 4)
-				{
-					Dice.hasrolledp4 = 2;
-				}
 				break;
 			case 3:
 				dice_picture.setImageResource(R.drawable.three);
 				Dice.hasrolled = 3;
-				if (Game.currentplayer == 1)
-				{
-					Dice.hasrolledp1 = 3;
-				}
-				else if (Game.currentplayer == 2)
-				{
-					Dice.hasrolledp2 = 3;
-				}
-				else if (Game.currentplayer == 3)
-				{
-					Dice.hasrolledp3 = 3;
-				}
-				else if (Game.currentplayer == 4)
-				{
-					Dice.hasrolledp4 = 3;
-				}
 				break;
 			case 4:
 				dice_picture.setImageResource(R.drawable.four);
 				Dice.hasrolled = 4;
-				if (Game.currentplayer == 1)
-				{
-					Dice.hasrolledp1 = 4;
-				}
-				else if (Game.currentplayer == 2)
-				{
-					Dice.hasrolledp2 = 4;
-				}
-				else if (Game.currentplayer == 3)
-				{
-					Dice.hasrolledp3 = 4;
-				}
-				else if (Game.currentplayer == 4)
-				{
-					Dice.hasrolledp4 = 4;
-				}
 				break;
 			case 5:
 				dice_picture.setImageResource(R.drawable.five);
 				Dice.hasrolled = 5;
-				if (Game.currentplayer == 1)
-				{
-					Dice.hasrolledp1 = 5;
-				}
-				else if (Game.currentplayer == 2)
-				{
-					Dice.hasrolledp2 = 5;
-				}
-				else if (Game.currentplayer == 3)
-				{
-					Dice.hasrolledp3 = 5;
-				}
-				else if (Game.currentplayer == 4)
-				{
-					Dice.hasrolledp4 = 5;
-				}
 				break;
 			case 6:
 				dice_picture.setImageResource(R.drawable.six);
 				Dice.hasrolled = 6;
-				if (Game.currentplayer == 1)
-				{
-					Dice.hasrolledp1 = 6;
-				}
-				else if (Game.currentplayer == 2)
-				{
-					Dice.hasrolledp2 = 6;
-				}
-				else if (Game.currentplayer == 3)
-				{
-					Dice.hasrolledp3 = 6;
-				}
-				else if (Game.currentplayer == 4)
-				{
-					Dice.hasrolledp4 = 6;
-				}
 				break;
 			default:
 			}

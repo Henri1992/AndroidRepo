@@ -4,22 +4,22 @@
     android:background="@drawable/backmobiel"
     android:gravity="center_horizontal" >
 
-    <ImageView
-        android:id="@+id/rollDice"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:onClick="HandleClick"
-        android:src="@drawable/dice3droll" />
-    
-            
         <TextView
             android:id="@+id/TextView_W"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:text="Nog niks verstuurd."
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ImageView
+            android:id="@+id/rollDice"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:onClick="HandleClick"
+            android:src="@drawable/dice3droll" />
     
 </RelativeLayout>
