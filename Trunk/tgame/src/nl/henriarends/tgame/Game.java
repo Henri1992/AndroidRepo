@@ -12,17 +12,15 @@ import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Game extends Activity {
 
 	int aantalOgen;
-
-	boolean player1 = false;
-	boolean player2 = false;
-	boolean player3 = false;
-	boolean player4 = false;
-
+	ImageView[] imageViews;
+	Player player1 = new Player();
+	
 	private static final String SOAP_ACTION_R = "http://tempuri.org/diceGet";
 	private static final String METHOD_NAME_R = "diceGet";
 	private static final String NAMESPACE_R = "http://tempuri.org/";
@@ -35,7 +33,25 @@ public class Game extends Activity {
 		setContentView(R.layout.game);
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		new AsyncTaskClass_R().execute(false);
-
+		
+		imageViews = new ImageView[]{(ImageView) findViewById(R.id.player1), (ImageView) findViewById(R.id.player2), 
+				(ImageView) findViewById(R.id.player3), (ImageView) findViewById(R.id.player4)};
+		activePlayer(1);
+	}
+	
+	private void activePlayer(int _activePlayer)
+	{
+		for(int i = 1; i <= imageViews.length; i++)
+		{
+			if(i == _activePlayer)
+			{
+				imageViews[i-1].setImageResource(getResources().getIdentifier("player" + i + "selected", "drawable", getPackageName()));
+			}
+			else
+			{
+				imageViews[i-1].setImageResource(getResources().getIdentifier("player" + i, "drawable", getPackageName()));
+			}
+		}
 	}
 
 	// /////////////////////////////
