@@ -2,24 +2,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backmobiel"
-    android:gravity="center_horizontal" >
+    android:gravity="top" >
 
-    <ImageView
-        android:id="@+id/rollDice"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:onClick="HandleClick"
-        android:src="@drawable/dice3droll" />
-    
-            
-        <TextView
-            android:id="@+id/TextView_W"
+        <ImageView
+            android:id="@+id/rollDice"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:onClick="HandleClick"
+            android:src="@drawable/dice3droll" />
+
+        <ImageView
+            android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Nog niks verstuurd."
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="-5dp"
+            android:src="@drawable/diceheader" />
     
 </RelativeLayout>

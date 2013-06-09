@@ -20,26 +20,28 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 import android.os.Handler.Callback;
 
 public class Dice extends Activity 
 {
-	private static final String SOAP_ACTION_W = "http://tempuri.org/Write";
-	private static final String METHOD_NAME_W = "Write";
+	private static final String SOAP_ACTION_W = "http://tempuri.org/diceSet";
+	private static final String METHOD_NAME_W = "diceSet";
 	private static final String NAMESPACE_W = "http://tempuri.org/";
-	private static final String URL_W = "http://techniek.server-ict.nl:20824/Service.asmx";
+	private static final String URL_W = "http://techniek.server-ict.nl:20824/service.asmx";
 	
 	public static int hasrolled;
-	public static int hasrolledp1;
-	public static int hasrolledp2;
-	public static int hasrolledp3;
-	public static int hasrolledp4;
+	
 	ImageView dice_picture;
 	SoundPool dice_sound = new SoundPool(1,AudioManager.STREAM_MUSIC,0);
 	int sound_id;
+	
+	SoundPool tada = new SoundPool(1,AudioManager.STREAM_MUSIC,0);
+	int sound_id2;
+	
 	//ispressed 0 = not-pressed  /  ispressed 1 = pressed
 	int ispressed = 0;
+	
 	//timer
 	Handler handler;
 	Timer timer=new Timer();
@@ -48,10 +50,15 @@ public class Dice extends Activity
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
+		Toast.makeText(getApplicationContext(), "Tap dice to start rolling!", Toast.LENGTH_SHORT).show();
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dice);
-		//play sound
+		
+		//make sound so the code can use it
 		sound_id=dice_sound.load(this,R.raw.shake_dice,1);
+		sound_id2=tada.load(this,R.raw.tada,1);
+		
 		//set image to rolling dice
 		dice_picture = (ImageView) findViewById(R.id.rollDice);
 		handler=new Handler(callback);
@@ -101,200 +108,34 @@ public class Dice extends Activity
 			int diceRand = randomno.nextInt(5 + 1);
 			if (ispressed == 0)
 				ispressed = 1;
+				Game.hasbeenrolled = 1;
 			switch(diceRand+1) 
 			{
 			//do stuff with the thrown number
 			case 1:
 				dice_picture.setImageResource(R.drawable.one);
 				Dice.hasrolled = 1;
-				if (Game.currentplayer == 1)
-				{
-					Dice.hasrolledp1 = 1;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 2)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 1;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 3)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 1;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 4)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 1;
-				}
 				break;
 			case 2:
 				dice_picture.setImageResource(R.drawable.two);
 				Dice.hasrolled = 2;
-				if (Game.currentplayer == 1)
-				{
-					Dice.hasrolledp1 = 2;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 2)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 2;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 3)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 2;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 4)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 2;
-				}
 				break;
 			case 3:
 				dice_picture.setImageResource(R.drawable.three);
 				Dice.hasrolled = 3;
-				if (Game.currentplayer == 1)
-				{
-					Dice.hasrolledp1 = 3;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 2)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 3;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 3)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 3;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 4)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 3;
-				}
 				break;
 			case 4:
 				dice_picture.setImageResource(R.drawable.four);
 				Dice.hasrolled = 4;
-				if (Game.currentplayer == 1)
-				{
-					Dice.hasrolledp1 = 4;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 2)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 4;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 3)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 4;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 4)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 4;
-				}
 				break;
 			case 5:
 				dice_picture.setImageResource(R.drawable.five);
 				Dice.hasrolled = 5;
-				if (Game.currentplayer == 1)
-				{
-					Dice.hasrolledp1 = 5;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 2)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 5;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 3)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 5;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 4)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 5;
-				}
 				break;
 			case 6:
 				dice_picture.setImageResource(R.drawable.six);
 				Dice.hasrolled = 6;
-				if (Game.currentplayer == 1)
-				{
-					Dice.hasrolledp1 = 6;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 2)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 6;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 3)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 6;
-					Dice.hasrolledp4 = 0;
-				}
-				else if (Game.currentplayer == 4)
-				{
-					Dice.hasrolledp1 = 0;
-					Dice.hasrolledp2 = 0;
-					Dice.hasrolledp3 = 0;
-					Dice.hasrolledp4 = 6;
-				}
+				tada.play(sound_id2,1.0f,1.0f,0,0,1.0f);
 				break;
 			default:
 			}
@@ -346,12 +187,6 @@ public class Dice extends Activity
 			
 			// Wanneer try failt return message
 			return "Failed to connect";
-		}
-
-		protected void onPostExecute(String result) {
-			TextView tv_W;
-			tv_W = (TextView)findViewById(R.id.TextView_W);
-			tv_W.setText("Verstuurd: " + result);
 		}
 	}
 }
