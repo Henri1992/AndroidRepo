@@ -1,5 +1,8 @@
 package nl.henriarends.tgame;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -31,26 +34,38 @@ public class Lobby extends Activity {
 	private static final String NAMESPACE_R = "http://tempuri.org/";
 	private static final String URL_R = "http://techniek.server-ict.nl:20824/Service.asmx";
 
-	boolean player1 = false;
-	boolean player2 = false;
-	boolean player3 = false;
-	boolean player4 = false;
 	int count = 0;
-
+	int playerTeller;
+	
+	private String timestamp = null;
+	private int lastPlayerID = 0;
+	private boolean stopCheck = false;
+		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.lobby);
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
+		new AsyncTaskClass_W().execute();
+		
 	}
 	
-	public void enablePlayer(String player)
+	public void checkPlayer(String player, boolean enabled)
 	{
-		ImageView imagePlayer1 = (ImageView) findViewById(getResources().getIdentifier(player + "button", "drawable", getPackageName()));
-		imagePlayer1.setVisibility(View.VISIBLE);
-		count++;
+		if (!enabled) {
+			ImageView imagePlayer = (ImageView) findViewById(getResources().getIdentifier(player + "button", "id", getPackageName()));
+			imagePlayer.setVisibility(View.INVISIBLE);
+		} else {
+			ImageView imagePlayer = (ImageView) findViewById(getResources().getIdentifier(player + "button", "id", getPackageName()));
+			imagePlayer.setVisibility(View.VISIBLE);
+			count++;
+		}
+	}
+	
+	public void playerGet()
+	{
+		
 	}
 	
 	// /////////////////////////////
@@ -58,10 +73,9 @@ public class Lobby extends Activity {
 	public class AsyncTaskClass_W extends AsyncTask<Void, Void, String> {
 		@Override
 		protected String doInBackground(Void... params) {
-			int newGame = 1;
 
 			SoapObject Request = new SoapObject(NAMESPACE_W, METHOD_NAME_W);
-			Request.addProperty("New game: ", newGame);
+			Request.addProperty("setGame", 1);
 
 			SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(
 					SoapEnvelope.VER11);
@@ -78,10 +92,10 @@ public class Lobby extends Activity {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+
 			// Wanneer try faalt return message
 			return "Failed to connect";
 		}
-	}
 	
 	// /////////////////////////////
 	// Inner class AsyncTaskClass_R
@@ -105,6 +119,8 @@ public class Lobby extends Activity {
 			}
 
 			SoapObject Request = new SoapObject(NAMESPACE_R, METHOD_NAME_R);
+			Request.addProperty("dateTime", timestamp);
+			Request.addProperty("playerID", lastPlayerID);
 
 			SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(
 					SoapEnvelope.VER11);
@@ -131,12 +147,25 @@ public class Lobby extends Activity {
 		// geimplementeerd
 		// Anders fouten op die versies
 		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-		protected void onPostExecute(String result) {
+		protected void onPostExecute(String result) 
+		{
 			
-			result = "player1";
+			// string die de tablet terugkrijgt: (playerID, timestamp; playerID2, timestamp2)
+			String[] splitString = result.split(";");
+			Collections.reverse(Arrays.asList(splitString));
 			
-			enablePlayer(result);
+			for (playerTeller = 1; playerTeller <= splitString.length; playerTeller++)
+			{
+				
+			}
 			
+			checkPlayer("player1", true);
+			checkPlayer("player2", true);
+			checkPlayer("player3", false);
+			checkPlayer("player4", false);
+						
+			//TextView TextView3 = (TextView) findViewById(R.id.notenoughplayers);
+			//TextView3.setText( Integer.toString(count));
 			// De start game button weergeven als genoeg spelers zijn aangesloten op
 			// het spel
 			if (count < 2) {
@@ -164,15 +193,17 @@ public class Lobby extends Activity {
 			
 			
 			// Blijft herhalen met zoeken naar spelers
-			
-			// Voorkomt dat thread sleep ervoor zorgt dat andere AsyncTasks
-			// op de thread sleep moeten wachten. (Voert beide AsyncTasks
-			// parallel i.p.v. serieel uit).
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-				new AsyncTaskClass_R().executeOnExecutor(
-						AsyncTask.THREAD_POOL_EXECUTOR, true);
-			} else {
-				new AsyncTaskClass_R().execute(true);
+			if(!stopCheck)
+			{
+				// Voorkomt dat thread sleep ervoor zorgt dat andere AsyncTasks
+				// op de thread sleep moeten wachten. (Voert beide AsyncTasks
+				// parallel i.p.v. serieel uit).
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+					new AsyncTaskClass_R().executeOnExecutor(
+							AsyncTask.THREAD_POOL_EXECUTOR, true);
+				} else {
+					new AsyncTaskClass_R().execute(true);
+				}
 			}
 
 
@@ -216,4 +247,5 @@ public class Lobby extends Activity {
 			*/
 		}
 	}
+}
 }

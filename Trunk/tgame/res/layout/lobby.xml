@@ -23,6 +23,7 @@
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
             android:contentDescription="@string/desc"
+            android:visibility="invisible"
             android:src="@drawable/player1button" />
 
         <ImageView
@@ -32,6 +33,7 @@
             android:layout_below="@+id/player1button"
             android:layout_centerHorizontal="true"
             android:contentDescription="@string/desc"
+            android:visibility="invisible"
             android:src="@drawable/player2button" />
 
         <ImageView
@@ -41,6 +43,7 @@
             android:layout_below="@+id/player2button"
             android:layout_centerHorizontal="true"
             android:contentDescription="@string/desc"
+            android:visibility="invisible"
             android:src="@drawable/player3button" />
 
         <ImageView
@@ -50,6 +53,7 @@
             android:layout_below="@+id/player3button"
             android:layout_centerHorizontal="true"
             android:contentDescription="@string/desc"
+            android:visibility="invisible"
             android:src="@drawable/player4button" />
 
         <TextView
@@ -77,6 +81,7 @@
             android:layout_width="250dp"
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
+            android:visibility="invisible"
             android:background="@drawable/menubutton1" />
     </RelativeLayout>
 
