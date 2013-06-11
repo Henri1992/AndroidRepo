@@ -1,11 +1,20 @@
 package com.example.diceapp;
 
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -15,7 +24,7 @@ public class Game extends Activity {
 
 	//dit is speler die op de mobiel zit
 	protected static int currentplayer = 0;
-	
+
 	//is de dice gebruikt? 0 = nee, 1 = ja
 	public static int hasbeenrolled = 0;
 
@@ -27,19 +36,21 @@ public class Game extends Activity {
 	private static int positionp2; //positie 2e pion
 	private static int positionp3; //positie 3e pion
 	private static int positionp4; //positie 4e pion
-	
+
 	SoundPool tada2 = new SoundPool(1,AudioManager.STREAM_MUSIC,0);
 	int sound_id;
+	private AudioManager audio;
 
 	@SuppressLint("CutPasteId")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game);
-		
+		audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 		sound_id=tada2.load(this,R.raw.tada2,1);
-		
+
 		//check de status van de dice en geef feedback terug aan de speler
+		/*
 		if (hasbeenrolled == 1)
 		{
 			Toast.makeText(getApplicationContext(), "Please, select a pawn which you want to set forward.", Toast.LENGTH_SHORT).show();
@@ -48,6 +59,7 @@ public class Game extends Activity {
 		{
 			Toast.makeText(getApplicationContext(), "Please, roll the dice first or wait for your turn.", Toast.LENGTH_SHORT).show();
 		}
+		*/
 
 		//roll
 		final ImageView rollButton = (ImageView) findViewById(R.id.imageRoll);
@@ -80,7 +92,7 @@ public class Game extends Activity {
 		final ImageView imgPion2 = (ImageView) findViewById(R.id.pion2);
 		final ImageView imgPion3 = (ImageView) findViewById(R.id.pion3);
 		final ImageView imgPion4 = (ImageView) findViewById(R.id.pion4);
-		
+
 		//Zet plaatjes aan de hand van de posities
 		//De waarde 0 geeft aan dat de pionnen nog in de thuisbasis zitten
 		//Alle pionnen boven de positie 0 zitten in het veld
@@ -232,7 +244,7 @@ public class Game extends Activity {
 				{
 					//Bereken positie met dice waarde
 					Game.positionp1 = Game.positionp1 + Dice.hasrolled;
-					
+
 					//WANNEER DE SPELER NUMMER 1 IS
 					if (thisplayer == 1){//ZET P1 SELECTIE: Groen
 						if (positionp1 >= 20){
@@ -244,7 +256,7 @@ public class Game extends Activity {
 					}
 					//WANNEER DE SPELER NUMMER 2 IS
 					else if(thisplayer == 2){//ZET P1 SELECTIE: Rood
-						
+
 						if (positionp1 >= 20){
 							imgPion1.setImageResource(R.drawable.pionroodfinish1);
 							tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
@@ -254,7 +266,7 @@ public class Game extends Activity {
 					}
 					//WANNEER DE SPELER NUMMER 3 IS
 					else if (thisplayer == 3){//ZET P1 SELECTIE: Zwart
-						
+
 						if (positionp1 >= 20){
 							imgPion1.setImageResource(R.drawable.pionzwartfinish1);
 							tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
@@ -275,7 +287,7 @@ public class Game extends Activity {
 					Dice.hasrolled = 0;
 					//zet de waarde naar 'er is nog niets gerolt'
 					hasbeenrolled = 0;
-					
+
 				}
 			}
 		});
@@ -303,7 +315,7 @@ public class Game extends Activity {
 				{
 					//Bereken positie met dice waarde
 					Game.positionp2 = Game.positionp2 + Dice.hasrolled;
-					
+
 					//WANNEER DE SPELER NUMMER 1 IS
 					if (thisplayer == 1){//ZET P2 SELECTIE: Groen
 						if (positionp2 >= 20){
@@ -371,7 +383,7 @@ public class Game extends Activity {
 				{
 					//Bereken positie met dice waarde
 					Game.positionp3 = Game.positionp3 + Dice.hasrolled;
-					
+
 					//WANNEER DE SPELER NUMMER 1 IS
 					if (thisplayer == 1){//ZET P3 SELECTIE: Groen
 						if (positionp3 >= 20){
@@ -413,7 +425,7 @@ public class Game extends Activity {
 					Dice.hasrolled = 0;
 					//zet de waarde naar 'er is nog niets gerolt'
 					hasbeenrolled = 0;
-					
+
 				}
 			}
 		});
@@ -441,7 +453,7 @@ public class Game extends Activity {
 				{
 					//Bereken positie met dice waarde
 					Game.positionp4 = Game.positionp4 + Dice.hasrolled;
-					
+
 					//WANNEER DE SPELER NUMMER 1 IS
 					if (thisplayer == 1){//ZET P4 SELECTIE: Groen
 						if (positionp4 >= 20){
@@ -482,10 +494,25 @@ public class Game extends Activity {
 					Dice.hasrolled = 0;
 					//zet de waarde naar 'er is nog niets gerolt'
 					hasbeenrolled = 0;
-					
+
 				}
 			}
 		});
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    switch (keyCode) {
+	    case KeyEvent.KEYCODE_VOLUME_UP:
+	        audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,
+	                AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
+	        return true;
+	    case KeyEvent.KEYCODE_VOLUME_DOWN:
+	        audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,
+	                AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI);
+	        return true;
+	    default:
+	        return false;
+	    }
 	}
 }
 
