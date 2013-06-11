@@ -6,15 +6,28 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class Main extends Activity {
+	
+	static int errorSet = 0;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		
+		if (errorSet == 1)
+		{
+			Toast.makeText(getApplicationContext(), "No game available", Toast.LENGTH_SHORT).show();
+			errorSet = 0;
+		}
+		else if (errorSet == 2)
+		{
+			Toast.makeText(getApplicationContext(), "Connection failed", Toast.LENGTH_SHORT).show();
+			errorSet = 0;
+		}		
 		//Search Button
 		ImageView imgSearch = (ImageView) findViewById(R.id.button_search);
 		imgSearch.setOnClickListener(new OnClickListener() 
@@ -22,7 +35,7 @@ public class Main extends Activity {
 			@Override
 			public void onClick(View v) 
 		    {
-		    	Intent intent = new Intent(v.getContext(), Login.class);
+		    	Intent intent = new Intent(v.getContext(), Connect.class);
 				startActivityForResult(intent, 0);
 		    }
 		});
