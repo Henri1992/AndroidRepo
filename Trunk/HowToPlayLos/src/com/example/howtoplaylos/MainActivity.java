@@ -14,7 +14,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main);
         // We get UI references
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
         mStep1 = (Button) findViewById(R.id.step1);
