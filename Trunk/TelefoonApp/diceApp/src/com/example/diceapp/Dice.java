@@ -108,7 +108,7 @@ public class Dice extends Activity
 			int diceRand = randomno.nextInt(5 + 1);
 			if (ispressed == 0)
 				ispressed = 1;
-				Game.hasbeenrolled = 1;
+				Game.hasBeenRolled = 1;
 			switch(diceRand+1) 
 			{
 			//do stuff with the thrown number
