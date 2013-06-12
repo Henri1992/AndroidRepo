@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menuback"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="500dp"
+        android:layout_above="@+id/relativeLayoutLobbybottom" >
+
+        <!-- Button
+            android:id="@+id/testButton"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="false"
+            android:background="@drawable/menubutton1" / -->
+
+        <ImageView
+            android:id="@+id/player1button"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/desc"
+            android:visibility="invisible"
+            android:src="@drawable/player1button" />
+
+        <ImageView
+            android:id="@+id/player2button"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/player1button"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/desc"
+            android:visibility="invisible"
+            android:src="@drawable/player2button" />
+
+        <ImageView
+            android:id="@+id/player3button"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/player2button"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/desc"
+            android:visibility="invisible"
+            android:src="@drawable/player3button" />
+
+        <ImageView
+            android:id="@+id/player4button"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/player3button"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/desc"
+            android:visibility="invisible"
+            android:src="@drawable/player4button" />
+
+        <TextView
+            android:id="@+id/notenoughplayers"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="@string/notenoughplayers"
+            android:textColor="#FFFFFF"
+            android:textIsSelectable="false"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutLobbybottom"
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true" >
+
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible"
+            android:background="@drawable/menubutton1" />
+    </RelativeLayout>
+
+</RelativeLayout>

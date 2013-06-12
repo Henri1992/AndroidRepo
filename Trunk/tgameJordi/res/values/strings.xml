@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GamePad</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="desc">Image</string>
+    <string name="notenoughplayers">A new game has started, 
+        please search with your mobile Gamepad application for available games in the area.
+        
+        * Please note that at least 2 players need to be connected before any game can be started.</string>
+
+</resources>
