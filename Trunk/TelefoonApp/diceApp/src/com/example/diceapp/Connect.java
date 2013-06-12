@@ -106,20 +106,20 @@ public class Connect extends Activity {
 					new AsyncTaskClass_R().execute(true);
 				}
 			}			
-			if (result.equals("1"))
+			if (result.equals("1"))//Is er een game gevonden?
 			{	
 				tv_R.setText("Game gevonden");
 				startActivity(new Intent(getApplication(), Lobby.class));
 				Connect.this.finish();
 			}
-			else if(result.equals("0"))
+			else if(result.equals("0"))//Is er geen game gevonden?
 			{
 				tv_R.setText("Geen game gevonden");
 				Main.errorSet = 1;
 				startActivity(new Intent(getApplication(), Main.class));
 				Connect.this.finish();
 			}
-			else
+			else//Geen connectie of een error?
 			{
 				tv_R.setText("Geen connectie beschikbaar");
 				Main.errorSet = 2;
