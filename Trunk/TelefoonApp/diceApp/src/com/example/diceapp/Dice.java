@@ -107,11 +107,10 @@ public class Dice extends Activity
 			Random randomno = new Random(System.currentTimeMillis());
 			int diceRand = randomno.nextInt(5 + 1);
 			if (ispressed == 0)
-				ispressed = 1;
-				Game.hasBeenRolled = 1;
+				ispressed = 1;//Er is op de dobbelsteen gedrukt.
+				Game.hasBeenRolled = 1;//Er is gerolt.
 			switch(diceRand+1) 
-			{
-			//do stuff with the thrown number
+			{//Bepaal gegevens door middel van het gegooide getal en een case.
 			case 1:
 				dice_picture.setImageResource(R.drawable.one);
 				Dice.hasrolled = 1;

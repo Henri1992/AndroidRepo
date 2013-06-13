@@ -532,14 +532,3 @@ public class Game extends Activity {
 	}
 }
 
-
-/*
- * newGameGet met player ID
- * 
- * 
- * dit wordt teruggestuurd
- * 0 = niet bekend
- * 1 = toegang
- * 2 = weiger
- */
-
