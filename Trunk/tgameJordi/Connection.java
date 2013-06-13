@@ -11,7 +11,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 
 
-public class Connection{
+public class Connection extends AsyncTask<Boolean, Void, String>{
 
 	private int aantalOgen;
 	private int count;
@@ -170,7 +170,7 @@ public class Connection{
 	}
 	///////////////////////////////
 	// Inner class diceGet
-	public class diceGet extends AsyncTask<Boolean, Void, String>
+	class diceGet extends AsyncTask<Boolean, Void, String>
 	{
 		private static final String SOAP_ACTION = "http://tempuri.org/diceGet";
 		private static final String METHOD_NAME = "diceGet";
@@ -222,19 +222,16 @@ public class Connection{
 			return ("Failed to connect");
 		}
 
+		return resultString;
 		// onPostExecute methode
 		// Implementeerd een hogere API versie dan minSdkVersion
 		// Fallback voor compatibiliteit met oudere versies zelf geïmplementeerd
 		// Anders fouten op die versies
-		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-		protected void onPostExecute(String result)
-		{
-			String diceGet = resultString;
-		}
+		
 	}
 	///////////////////////////////
 	// Inner class pionGet
-	public class pionGet extends AsyncTask<Boolean, Void, String>
+	private class pionGet extends AsyncTask<Boolean, Void, String>
 	{
 		private static final String SOAP_ACTION = "http://tempuri.org/pionGet";
 		private static final String METHOD_NAME = "pionGet";
