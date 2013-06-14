@@ -11,7 +11,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 
 
-public class Connection extends AsyncTask<Boolean, Void, String>{
+public  class Connection extends AsyncTask<Boolean, Void, String>{
 
 	private int aantalOgen;
 	private int count;
@@ -22,7 +22,7 @@ public class Connection extends AsyncTask<Boolean, Void, String>{
 		turnNumber = 0;
 	}
 
-	public void turnSet(int turnNumber)
+	public  void turnSet(int turnNumber)
 	{
 		this.turnNumber = turnNumber;
 		// Aanroepen van turnSet class - geen parameter dus wordt maar 1 keer uitgevoerd
@@ -33,6 +33,9 @@ public class Connection extends AsyncTask<Boolean, Void, String>{
 
 		// Aanroepen van newGameSet class - geen parameter dus wordt maar 1 keer uitgevoerd
 		new newGameSet().execute();
+		
+		// Aanroepen van turnSet class - geen parameter dus wordt maar 1 keer uitgevoerd
+		new pionSet().execute();
 
 		// Aanroepen van diceGet class - met parameter
 		// blijft zichzelf als voorwaarde klopt herhalen
@@ -52,10 +55,10 @@ public class Connection extends AsyncTask<Boolean, Void, String>{
 	// Inner class turnSet
 	public class turnSet extends AsyncTask<Void, Void, String>
 	{
-		private static final String SOAP_ACTION = "http://tempuri.org/turnSet";
-		private static final String METHOD_NAME = "turnSet";
-		private static final String NAMESPACE = "http://tempuri.org/";
-		private static final String URL = "http://techniek.server-ict.nl:20824/service.asmx";
+		private  final String SOAP_ACTION = "http://tempuri.org/turnSet";
+		private  final String METHOD_NAME = "turnSet";
+		private  final String NAMESPACE = "http://tempuri.org/";
+		private  final String URL = "http://techniek.server-ict.nl:20824/service.asmx";
 
 		@Override
 		protected String doInBackground(Void... params) {
@@ -90,12 +93,12 @@ public class Connection extends AsyncTask<Boolean, Void, String>{
 	}
 	///////////////////////////////
 	// Inner class newGameSet
-	public class newGameSet extends AsyncTask<Void, Void, String>
+	public  class newGameSet extends AsyncTask<Void, Void, String>
 	{
-		private static final String SOAP_ACTION = "http://tempuri.org/newGameSet";
-		private static final String METHOD_NAME = "newGameSet";
-		private static final String NAMESPACE = "http://tempuri.org/";
-		private static final String URL = "http://techniek.server-ict.nl:20824/service.asmx";
+		private  final String SOAP_ACTION = "http://tempuri.org/newGameSet";
+		private  final String METHOD_NAME = "newGameSet";
+		private  final String NAMESPACE = "http://tempuri.org/";
+		private  final String URL = "http://techniek.server-ict.nl:20824/service.asmx";
 
 		@Override
 		protected String doInBackground(Void... params) {
@@ -130,12 +133,50 @@ public class Connection extends AsyncTask<Boolean, Void, String>{
 	}
 	///////////////////////////////
 	// Inner class gameStartSet
-	public class gameStartSet extends AsyncTask<Void, Void, String>
+	public  class gameStartSet extends AsyncTask<Void, Void, String>
 	{
-		private static final String SOAP_ACTION = "http://tempuri.org/gameStartSet";
-		private static final String METHOD_NAME = "gameStartSet";
-		private static final String NAMESPACE = "http://tempuri.org/";
-		private static final String URL = "http://techniek.server-ict.nl:20824/service.asmx";
+		private  final String SOAP_ACTION = "http://tempuri.org/gameStartSet";
+		private  final String METHOD_NAME = "gameStartSet";
+		private  final String NAMESPACE = "http://tempuri.org/";
+		private  final String URL = "http://techniek.server-ict.nl:20824/service.asmx";
+
+		@Override
+		protected String doInBackground(Void... params) {
+
+			SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
+			Request.addProperty("turn", turnNumber);
+
+			SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+			soapEnvelope.dotNet = true;
+			soapEnvelope.setOutputSoapObject(Request);
+
+			HttpTransportSE aht = new HttpTransportSE(URL);
+			try
+			{
+				aht.call(SOAP_ACTION, soapEnvelope);
+				SoapPrimitive resultString = (SoapPrimitive)soapEnvelope.getResponse();
+
+				return resultString.toString();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+
+			// Wanneer try faalt return message
+			return "Failed to connect";
+		}
+
+		protected void onPostExecute(String result) {
+
+		}
+	}
+	public class pionSet extends AsyncTask<Void, Void, String>
+	{
+		private  final String SOAP_ACTION = "http://tempuri.org/pionSet";
+		private  final String METHOD_NAME = "pionSet";
+		private  final String NAMESPACE = "http://tempuri.org/";
+		private  final String URL = "http://techniek.server-ict.nl:20824/service.asmx";
 
 		@Override
 		protected String doInBackground(Void... params) {
@@ -170,12 +211,12 @@ public class Connection extends AsyncTask<Boolean, Void, String>{
 	}
 	///////////////////////////////
 	// Inner class diceGet
-	class diceGet extends AsyncTask<Boolean, Void, String>
+	public class diceGet extends AsyncTask<Boolean, Void, String>
 	{
-		private static final String SOAP_ACTION = "http://tempuri.org/diceGet";
-		private static final String METHOD_NAME = "diceGet";
-		private static final String NAMESPACE = "http://tempuri.org/";
-		private static final String URL = "http://techniek.server-ict.nl:20824/service.asmx";
+		private  final String SOAP_ACTION = "http://tempuri.org/diceGet";
+		private  final String METHOD_NAME = "diceGet";
+		private  final String NAMESPACE = "http://tempuri.org/";
+		private  final String URL = "http://techniek.server-ict.nl:20824/service.asmx";
 		private String resultString;
 		private String diceGet;
 
@@ -231,12 +272,12 @@ public class Connection extends AsyncTask<Boolean, Void, String>{
 	}
 	///////////////////////////////
 	// Inner class pionGet
-	private class pionGet extends AsyncTask<Boolean, Void, String>
+	private  class pionGet extends AsyncTask<Boolean, Void, String>
 	{
-		private static final String SOAP_ACTION = "http://tempuri.org/pionGet";
-		private static final String METHOD_NAME = "pionGet";
-		private static final String NAMESPACE = "http://tempuri.org/";
-		private static final String URL = "http://techniek.server-ict.nl:20824/service.asmx";
+		private  final String SOAP_ACTION = "http://tempuri.org/pionGet";
+		private  final String METHOD_NAME = "pionGet";
+		private  final String NAMESPACE = "http://tempuri.org/";
+		private  final String URL = "http://techniek.server-ict.nl:20824/service.asmx";
 		private String resultString;
 		private String pionGet;
 
@@ -295,12 +336,12 @@ public class Connection extends AsyncTask<Boolean, Void, String>{
 	}
 	///////////////////////////////
 	// Inner class playerGet
-	public class playerGet extends AsyncTask<Boolean, Void, String>
+	public  class playerGet extends AsyncTask<Boolean, Void, String>
 	{
-		private static final String SOAP_ACTION = "http://tempuri.org/playerGet";
-		private static final String METHOD_NAME = "playerGet";
-		private static final String NAMESPACE = "http://tempuri.org/";
-		private static final String URL = "http://techniek.server-ict.nl:20824/service.asmx";
+		private  final String SOAP_ACTION = "http://tempuri.org/playerGet";
+		private  final String METHOD_NAME = "playerGet";
+		private  final String NAMESPACE = "http://tempuri.org/";
+		private  final String URL = "http://techniek.server-ict.nl:20824/service.asmx";
 		private String resultString;
 		private String playerGet;
 
