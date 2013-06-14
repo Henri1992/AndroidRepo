@@ -7,6 +7,7 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
 
@@ -18,8 +19,12 @@ public class Player {
 	private boolean finishAll;
 	private boolean basis;
 	int count = 1;
-
-	public Player(){
+	private playerGet playerGetId;
+	private Context appContext;
+	
+	public Player(Context appContext){
+		this.appContext = appContext;
+		
 		if (count <= 4 && count >= 1)
 		{
 			playerNaam = count;
@@ -28,10 +33,10 @@ public class Player {
 		else
 		{
 			count = 1;
-		}
-		;
+		};
+		playerGet playerGetId = new playerGet();
 		playerNaam = 1;
-		playerId = 23/*komt nog ophaalcode*/;
+		playerId = 1 /*komt nog*/;
 		switch(playerNaam)
 		{
 		case 1: color = "Green";

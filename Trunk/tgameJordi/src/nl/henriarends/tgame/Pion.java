@@ -7,10 +7,12 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.widget.Toast;
 
-public class Pion {
+public class Pion{
 
 	private int worp;
 	private int positie;
@@ -20,12 +22,15 @@ public class Pion {
 	private String color;
 	private int playerNaam;
 	private int worpResult;
+	private String[] myStringArray;
+	private Context appContext;
 
 	int count = 1;
 
-	public Pion(){
-
-		if (count <= 4 && count >= 1)
+	public Pion(Context appContext){
+		this.appContext = appContext;
+		
+		if (count <= 16 && count >= 1)
 		{
 			pionNummer = count;
 			count++;
@@ -57,33 +62,16 @@ public class Pion {
 	public void verplaats()
 	{
 		//methode om de dobbelsteen op te halen.
-		switch(worpResult)
-		{
-		case 0: worp = 0;
-		break;
-		case 1: worp = 1;
-		break;
-		case 2: worp = 2;
-		break;
-		case 3: worp = 3;
-		break;
-		case 4: worp = 4;
-		break;
-		case 5: worp = 5;
-		break;
-		case 6: worp = 6;
-		break;
-		}
+		new diceGet().execute(false);
+		
 	}
-	
+	// Haalt op : int worp, int pion, int player, int gameId, int Succesvol
 	public class diceGet extends AsyncTask<Boolean, Void, String>
 	{
 		private  final String SOAP_ACTION = "http://tempuri.org/diceGet";
 		private  final String METHOD_NAME = "diceGet";
 		private  final String NAMESPACE = "http://tempuri.org/";
 		private  final String URL = "http://techniek.server-ict.nl:20824/service.asmx";
-		private String resultString;
-		private String diceGet;
 		
 		protected String doInBackground(Boolean... params) {
 			if(params.length != 1) {
@@ -134,10 +122,13 @@ public class Pion {
 		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 		protected void onPostExecute(String result)
 		{
-			int intResult = Integer.parseInt(result);
+			myStringArray = result.split(",");
+			
+			int intResult = Integer.parseInt(myStringArray[0]);
 			
 			if(intResult >= 1 && intResult <= 6)
 			{
+				worpResult = intResult;
 				// Voorkomt dat thread sleep ervoor zorgt dat andere AsyncTasks
 				// op de thread sleep moeten wachten. (Voert beide AsyncTasks
 				// parallel i.p.v. serieel uit).
@@ -149,7 +140,12 @@ public class Pion {
 				{
 					new diceGet().execute(true);
 				}
-				worpResult = intResult;
+			}
+			else
+			{
+				// Geef toast
+				Toast.makeText(appContext, "Something has failed, the dice does not have the right values"
+							, Toast.LENGTH_LONG).show();
 			}
 
 			// Wanneer if-test = false stopt loop en wordt onderstaande uitgevoerd			
