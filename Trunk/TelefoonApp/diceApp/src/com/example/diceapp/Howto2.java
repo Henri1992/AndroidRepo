@@ -23,7 +23,7 @@ public class Howto2 extends Activity {
 			{
 				Intent intent = new Intent(v.getContext(), Howto3.class);
 				startActivityForResult(intent, 0);
-				finish();
+				Howto2.this.finish();
 			}
 		});
 	}
