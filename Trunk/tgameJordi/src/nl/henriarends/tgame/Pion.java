@@ -6,26 +6,25 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.widget.Toast;
 
 public class Pion{	
 	
-	private int worp;
 	private int positie;
 	private int pionNummer;
 	private boolean basis;
 	private boolean finish;
 	private int playerNaam;
+	private int status;
 	
 	private boolean succesvol;
 	
 	private int worpResult;
 	private String[] myStringArray;
 	private Context appContext;
+	
+	private int turnNumber;
 
 	int count = 1;
 
@@ -38,11 +37,12 @@ public class Pion{
 		basis = true;
 		finish = false;
 		succesvol = false;
+		status = 0;
 		//Connection.diceGet dg = Connection.new diceGet();
 
 	}
 
-	public void verplaats(int worp)
+	public int verplaats(int worp)
 	{
 		//methode om de dobbelsteen op te halen.
 		if (worp == 6)
@@ -61,10 +61,12 @@ public class Pion{
 					case 4: positie = 38;	//Blue
 					break;
 							}
+					status = 1;
 					succesvol = true;
 				}
 			else if (finish == true)
 				{
+					status = 2;
 					succesvol = false;
 				}
 			else
@@ -76,6 +78,7 @@ public class Pion{
 					}
 				else
 					{
+					status = 2;
 						succesvol = false;
 					}
 				}
@@ -92,8 +95,60 @@ public class Pion{
 				succesvol = true;
 			}
 		}
-		
+		return positie;
 	}
+	
+	public void setPion ()
+	{
+		new pionSet().execute();
+	}
+	
+	public boolean getFinish()
+	{
+		return finish;
+	}
+	
+	public class pionSet extends AsyncTask<Void, Void, String>
+	{
+		private  final String SOAP_ACTION = "http://tempuri.org/pionSet";
+		private  final String METHOD_NAME = "pionSet";
+		private  final String NAMESPACE = "http://tempuri.org/";
+		private  final String URL = "http://techniek.server-ict.nl:20824/service.asmx";
+
+		@Override
+		protected String doInBackground(Void... params) {
+
+			SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
+			Request.addProperty("playerID", playerNaam);
+			Request.addProperty("pion", pionNummer);
+			Request.addProperty("status", status);
+
+			SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+			soapEnvelope.dotNet = true;
+			soapEnvelope.setOutputSoapObject(Request);
+
+			HttpTransportSE aht = new HttpTransportSE(URL);
+			try
+			{
+				aht.call(SOAP_ACTION, soapEnvelope);
+				SoapPrimitive resultString = (SoapPrimitive)soapEnvelope.getResponse();
+
+				return resultString.toString();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+
+			// Wanneer try faalt return message
+			return "Failed to connect";
+		}
+
+		protected void onPostExecute(String result) {
+
+		}
+	}
+	/*
 	// Haalt op : int worp, int pion, int player, int gameId, int Succesvol
 	public class diceGet extends AsyncTask<Boolean, Void, String>
 	{
@@ -181,5 +236,5 @@ public class Pion{
 			// Sla misschien result op - verwijder deze regels indien in gebruik		}
 		}
 	}
-
+*/
 }

@@ -26,7 +26,7 @@ public class Lobby extends Activity {
 
 	int count = 0;
 	private int playerCounter = 1;
-	String players;
+	protected static String players;
 	
 	private String playerIDAndDateTime = null;
 	private boolean stopCheck = false;

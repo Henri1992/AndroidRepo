@@ -19,10 +19,11 @@ public class Game extends Activity {
 
 	int aantalOgen;
 	ImageView[] imageViews;
+	protected static String PlayerIDs = Lobby.players;
 	
 	// Maak players aan met Application Context
 	// Gebruik Application Context i.p.v. Activity Context, want anders geeft Activity Context memory leaks
-	Player player1 = new Player(this.getApplicationContext());
+	Player player1 = new Player(this.getApplicationContext(), 1);
 	
 
 	private static final String SOAP_ACTION_R = "http://tempuri.org/diceGet";
