@@ -39,11 +39,7 @@ public  class Connection extends AsyncTask<Boolean, Void, String>{
 
 		// Aanroepen van diceGet class - met parameter
 		// blijft zichzelf als voorwaarde klopt herhalen
-		new diceGet().execute(false);	
-
-		// Aanroepen van pionGet class - met parameter
-		// blijft zichzelf als voorwaarde klopt herhalen
-		new pionGet().execute(false);	
+		new diceGet().execute(false);		
 
 		// Aanroepen van playerGet class - met parameter
 		// blijft zichzelf als voorwaarde klopt herhalen

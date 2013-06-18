@@ -12,57 +12,86 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.widget.Toast;
 
-public class Pion{
-
+public class Pion{	
+	
 	private int worp;
 	private int positie;
 	private int pionNummer;
 	private boolean basis;
 	private boolean finish;
-	private String color;
 	private int playerNaam;
+	
+	private boolean succesvol;
+	
 	private int worpResult;
 	private String[] myStringArray;
 	private Context appContext;
 
 	int count = 1;
 
-	public Pion(Context appContext){
+	public Pion(Context appContext, int playerNaam, int pionNummer){
 		this.appContext = appContext;
 		
-		if (count <= 16 && count >= 1)
-		{
-			pionNummer = count;
-			count++;
-		}
-		else
-		{
-			count = 1;
-		}
-		;
-		playerNaam = 1 /*komt nog*/;
+		this.pionNummer = pionNummer;
+		this.playerNaam = playerNaam;
 		positie = 0;
 		basis = true;
 		finish = false;
-		switch(playerNaam)
-		{
-		case 1: color = "Green";
-		break;
-		case 2: color = "Blue";
-		break;
-		case 3: color = "Black";
-		break;
-		case 4: color = "Red";
-		break;
-		};
+		succesvol = false;
 		//Connection.diceGet dg = Connection.new diceGet();
 
 	}
 
-	public void verplaats()
+	public void verplaats(int worp)
 	{
 		//methode om de dobbelsteen op te halen.
-		new diceGet().execute(false);
+		if (worp == 6)
+			{
+			if (basis == true)
+				{
+					basis = false;
+					switch(playerNaam)
+							{
+					case 1: positie = 1;	//Green
+					break;
+					case 2: positie = 13;	//Red
+					break;
+					case 3: positie = 26; 	//Black
+					break;
+					case 4: positie = 38;	//Blue
+					break;
+							}
+					succesvol = true;
+				}
+			else if (finish == true)
+				{
+					succesvol = false;
+				}
+			else
+				{
+				if(positie >= 1 && positie <= 49)
+					{	
+						positie = positie + worp;
+						succesvol = true;
+					}
+				else
+					{
+						succesvol = false;
+					}
+				}
+			}
+		else
+		{
+			if(basis == true)
+			{
+				succesvol = true;
+			}
+			else
+			{
+				positie = positie + worp;
+				succesvol = true;
+			}
+		}
 		
 	}
 	// Haalt op : int worp, int pion, int player, int gameId, int Succesvol
