@@ -1,0 +1,25 @@
+C:\Users\Gerald Germes\Desktop\WebApplication1\WebApplication1\bin\WebApplication1.dll
+C:\Users\Gerald Germes\Desktop\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+C:\Users\Gerald Germes\Desktop\WebApplication1\WebApplication1\obj\Release\WebApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Gerald Germes\Desktop\WebApplication1\WebApplication1\obj\Release\WebApplication1.dll
+C:\Users\Gerald Germes\Desktop\WebApplication1\WebApplication1\obj\Release\WebApplication1.pdb
+C:\Users\Gerald Germes\Desktop\method 10 juni\WebApplication1\WebApplication1\bin\WebApplication1.dll
+C:\Users\Gerald Germes\Desktop\method 10 juni\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+C:\Users\Gerald Germes\Desktop\method 10 juni\WebApplication1\WebApplication1\obj\Release\WebApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Gerald Germes\Desktop\method 10 juni\WebApplication1\WebApplication1\obj\Release\WebApplication1.dll
+C:\Users\Gerald Germes\Desktop\method 10 juni\WebApplication1\WebApplication1\obj\Release\WebApplication1.pdb
+C:\Users\Gerald Germes\Desktop\method 12 juni\WebApplication1\WebApplication1\bin\WebApplication1.dll
+C:\Users\Gerald Germes\Desktop\method 12 juni\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+C:\Users\Gerald Germes\Desktop\method 12 juni\WebApplication1\WebApplication1\obj\Release\WebApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Gerald Germes\Desktop\method 12 juni\WebApplication1\WebApplication1\obj\Release\WebApplication1.dll
+C:\Users\Gerald Germes\Desktop\method 12 juni\WebApplication1\WebApplication1\obj\Release\WebApplication1.pdb
+C:\Users\Gerald Germes\Desktop\method 14 juni\WebApplication1\WebApplication1\bin\WebApplication1.dll
+C:\Users\Gerald Germes\Desktop\method 14 juni\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+C:\Users\Gerald Germes\Desktop\method 14 juni\WebApplication1\WebApplication1\obj\Release\WebApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Gerald Germes\Desktop\method 14 juni\WebApplication1\WebApplication1\obj\Release\WebApplication1.dll
+C:\Users\Gerald Germes\Desktop\method 14 juni\WebApplication1\WebApplication1\obj\Release\WebApplication1.pdb
+E:\Informatica leerjaar 1\Periode 4\NoBlackBoard\Project Weather Station\Methode versies server\method 18 juni\WebApplication1\WebApplication1\bin\WebApplication1.dll
+E:\Informatica leerjaar 1\Periode 4\NoBlackBoard\Project Weather Station\Methode versies server\method 18 juni\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+E:\Informatica leerjaar 1\Periode 4\NoBlackBoard\Project Weather Station\Methode versies server\method 18 juni\WebApplication1\WebApplication1\obj\Release\WebApplication1.csprojResolveAssemblyReference.cache
+E:\Informatica leerjaar 1\Periode 4\NoBlackBoard\Project Weather Station\Methode versies server\method 18 juni\WebApplication1\WebApplication1\obj\Release\WebApplication1.dll
+E:\Informatica leerjaar 1\Periode 4\NoBlackBoard\Project Weather Station\Methode versies server\method 18 juni\WebApplication1\WebApplication1\obj\Release\WebApplication1.pdb

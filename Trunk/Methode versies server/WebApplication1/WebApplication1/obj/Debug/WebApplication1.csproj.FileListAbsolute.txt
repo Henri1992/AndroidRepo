@@ -1,0 +1,15 @@
+c:\users\henri\documents\visual studio 2010\Projects\WebApplication1\WebApplication1\bin\WebApplication1.dll
+c:\users\henri\documents\visual studio 2010\Projects\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+c:\users\henri\documents\visual studio 2010\Projects\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
+c:\users\henri\documents\visual studio 2010\Projects\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\Users\Henri\Dropbox\School\Jaar 1\Periode 4\Weather Station\Project\Server groep\WebApplication1\WebApplication1\bin\WebApplication1.dll
+C:\Users\Henri\Dropbox\School\Jaar 1\Periode 4\Weather Station\Project\Server groep\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+C:\Users\Henri\Dropbox\School\Jaar 1\Periode 4\Weather Station\Project\Server groep\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Henri\Dropbox\School\Jaar 1\Periode 4\Weather Station\Project\Server groep\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
+C:\Users\Henri\Dropbox\School\Jaar 1\Periode 4\Weather Station\Project\Server groep\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+E:\Informatica leerjaar 1\Periode 4\NoBlackBoard\Project Weather Station\Methode versies server\method 18 juni\WebApplication1\WebApplication1\bin\WebApplication1.dll
+E:\Informatica leerjaar 1\Periode 4\NoBlackBoard\Project Weather Station\Methode versies server\method 18 juni\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+E:\Informatica leerjaar 1\Periode 4\NoBlackBoard\Project Weather Station\Methode versies server\method 18 juni\WebApplication1\WebApplication1\bin\mysql.data.dll
+E:\Informatica leerjaar 1\Periode 4\NoBlackBoard\Project Weather Station\Methode versies server\method 18 juni\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+E:\Informatica leerjaar 1\Periode 4\NoBlackBoard\Project Weather Station\Methode versies server\method 18 juni\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
+E:\Informatica leerjaar 1\Periode 4\NoBlackBoard\Project Weather Station\Methode versies server\method 18 juni\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
