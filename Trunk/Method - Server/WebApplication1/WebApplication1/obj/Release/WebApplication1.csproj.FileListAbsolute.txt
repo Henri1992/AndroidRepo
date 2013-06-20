@@ -23,3 +23,8 @@ E:\Informatica leerjaar 1\Periode 4\NoBlackBoard\Project Weather Station\Methode
 E:\Informatica leerjaar 1\Periode 4\NoBlackBoard\Project Weather Station\Methode versies server\method 18 juni\WebApplication1\WebApplication1\obj\Release\WebApplication1.csprojResolveAssemblyReference.cache
 E:\Informatica leerjaar 1\Periode 4\NoBlackBoard\Project Weather Station\Methode versies server\method 18 juni\WebApplication1\WebApplication1\obj\Release\WebApplication1.dll
 E:\Informatica leerjaar 1\Periode 4\NoBlackBoard\Project Weather Station\Methode versies server\method 18 juni\WebApplication1\WebApplication1\obj\Release\WebApplication1.pdb
+E:\Informatica leerjaar 1\Periode 4\Verwijzing naar GitHub AndroidRepo\Trunk\Method - Server\WebApplication1\WebApplication1\bin\WebApplication1.dll
+E:\Informatica leerjaar 1\Periode 4\Verwijzing naar GitHub AndroidRepo\Trunk\Method - Server\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+E:\Informatica leerjaar 1\Periode 4\Verwijzing naar GitHub AndroidRepo\Trunk\Method - Server\WebApplication1\WebApplication1\obj\Release\WebApplication1.csprojResolveAssemblyReference.cache
+E:\Informatica leerjaar 1\Periode 4\Verwijzing naar GitHub AndroidRepo\Trunk\Method - Server\WebApplication1\WebApplication1\obj\Release\WebApplication1.dll
+E:\Informatica leerjaar 1\Periode 4\Verwijzing naar GitHub AndroidRepo\Trunk\Method - Server\WebApplication1\WebApplication1\obj\Release\WebApplication1.pdb

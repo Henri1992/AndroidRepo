@@ -85,6 +85,7 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Properties\PublishProfiles\Profile2.pubxml" />
+    <None Include="Properties\PublishProfiles\Profile3.pubxml" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
