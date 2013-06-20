@@ -11,6 +11,8 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.AsyncTask;
@@ -20,62 +22,91 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class Game extends Activity {
 
-	private static final String SOAP_ACTION_Rturn = "http://tempuri.org/turnGet";
-	private static final String METHOD_NAME_Rturn = "turnGet";
-	private static final String NAMESPACE_Rturn = "http://tempuri.org/";
-	private static final String URL_Rturn = "http://techniek.server-ict.nl:20824/Service.asmx";
-
-
 	//dit is speler die op de mobiel zit
 	protected static int currentPlayer = Lobby.localPlayer;
 
-	//is de dice gebruikt? 0 = nee, 1 = ja
+	//turnGet informatie die wordt gebruikt bij het regelen van beurten.
+	protected int getPlayer = 0;
+	protected static int currentTime;
+	protected long timeStampOld = 0;//millis
+	protected long timeStamp;//milis
+
+	//Geef feedback aan de speler
+	public static int showTurnData = 0;
+
+	//Mag de speler rollen 0=ja 1=nee (staat los van de beurt van de speler)
 	public static int hasBeenRolled = 0;
 
-	//heeft de speler de beurt?
+	//Is de speler aan de beurt? 0=nee 1=ja
 	protected static int hasTurn = 0;
 
-	//Hier worden de posities van de pionnen opgeslagen, dit wordt later via de server geregeld.
-	private static int positionp1; //positie 1e pion
-	private static int positionp2; //positie 2e pion
-	private static int positionp3; //positie 3e pion
-	private static int positionp4; //positie 4e pion
+	//Is alle data klaar om verstuurd te worden? 0=nee 1=ja
+	protected int dataReady = 0;
 
+	//Hier worden de posities van de pionnen opgeslagen, dit wordt later via de server geregeld.
+	private static int statusPion1; //positie 1e pion
+	private static int statusPion2; //positie 2e pion
+	private static int statusPion3; //positie 3e pion
+	private static int statusPion4; //positie 4e pion
+	private static int selectedPion = 0; //geef aan welke pion is geselecteerd
+
+	//Zet gebruik geluid (1)
 	SoundPool tada2 = new SoundPool(1,AudioManager.STREAM_MUSIC,0);
 	int sound_id;
 	private AudioManager audio;
 
+
+	@SuppressWarnings("deprecation")
 	@SuppressLint("CutPasteId")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game);
-		new AsyncTaskClass_R().execute(false);
+		new AsyncTaskClass_RhasTurn().execute(false);
 
-		//initieer geluiden
+		//Zet gebruik geluid (2)
 		audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 		sound_id=tada2.load(this,R.raw.tada2,1);
+
+		//Zet de achtergrond voor de speler gebaseert op hun nummer.
+		Resources res = getResources();
+		LinearLayout linearLayout = (LinearLayout)findViewById(R.id.game);
+		if (currentPlayer == 1){
+			Drawable drawable = res.getDrawable(R.drawable.backmobielgroen); 
+			linearLayout.setBackgroundDrawable(drawable);
+		}
+		else if (currentPlayer == 2){
+			Drawable drawable = res.getDrawable(R.drawable.backmobielrood); 
+			linearLayout.setBackgroundDrawable(drawable);
+		}
+		else if (currentPlayer == 3){
+			Drawable drawable = res.getDrawable(R.drawable.backmobielzwart); 
+			linearLayout.setBackgroundDrawable(drawable);
+		}
+		else if (currentPlayer == 2){
+			Drawable drawable = res.getDrawable(R.drawable.backmobielblauw); 
+			linearLayout.setBackgroundDrawable(drawable);
+		}
 
 		////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////
 		//GAME START
 
+
 		//check de status van de dice en geef feedback terug aan de speler
-		if (hasBeenRolled == 1)
-		{
+		if (showTurnData == 1){
 			Toast.makeText(getApplicationContext(), "Please, select a pawn which you want to set forward.", Toast.LENGTH_SHORT).show();
-		}
-		else if(hasBeenRolled == 0)
-		{
-			Toast.makeText(getApplicationContext(), "Please, roll the dice first or wait for your turn.", Toast.LENGTH_SHORT).show();
+			showTurnData = 0;
 		}
 
-		//roll
+		//OnClickListener voor de rolbutton
+		//Check of de speler mag rollen wanneer hij/zij hier op klikt.
 		final ImageView rollButton = (ImageView) findViewById(R.id.imageRoll);
 		rollButton.setOnClickListener(new OnClickListener()
 		{
@@ -83,28 +114,12 @@ public class Game extends Activity {
 			public void onClick(View v)
 			{
 				//wanneer er nog niet gerolt is met de dice ga naar de dice toe
-				if (hasBeenRolled == 0 && hasTurn == 1)
-				{
+				if (hasBeenRolled == 0 && hasTurn == 1){
 					startActivity(new Intent(getApplication(), Dice.class));
 					Game.this.finish();
 				}
 			}
 		});
-		
-		//zet de rollbutton op de groene 'ok' kleur wanneer de speler mag rollen
-		if ((hasBeenRolled == 0) && (hasTurn == 1))
-		{
-			rollButton.setImageResource(R.drawable.rollbuttongreen);
-		}
-		//anders zet de rollbutton op de rode 'weiger' kleur
-		else if ((hasBeenRolled == 1) && (hasTurn == 1))
-		{
-			rollButton.setImageResource(R.drawable.rollbuttonred);
-		}
-		else if (((hasBeenRolled == 0) || (hasBeenRolled == 1)) && hasTurn == 0)
-		{
-			rollButton.setImageResource(R.drawable.rollbuttonred);
-		}
 
 		//zoek plaatjes van de pionnen, zodat deze gebruikt kunnen worden door de code
 		final ImageView imgPion1 = (ImageView) findViewById(R.id.pion1);
@@ -112,60 +127,58 @@ public class Game extends Activity {
 		final ImageView imgPion3 = (ImageView) findViewById(R.id.pion3);
 		final ImageView imgPion4 = (ImageView) findViewById(R.id.pion4);
 
-		//Zet plaatjes aan de hand van de posities
-		//De waarde 0 geeft aan dat de pionnen nog in de thuisbasis zitten
-		//Alle pionnen boven de positie 0 zitten in het veld
-		//de waarde 0 is een dummy
-		//Update image pion 1
-		if (Game.positionp1 > 0){
+		//Zet plaatjes pion wanneer deze in basis zitten.
+		if (Game.statusPion1 == 1){imgPion1.setImageResource(R.drawable.pionleeg1);}
+		if (Game.statusPion2 == 1){imgPion2.setImageResource(R.drawable.pionleeg2);}
+		if (Game.statusPion3 == 1){imgPion3.setImageResource(R.drawable.pionleeg3);}
+		if (Game.statusPion4 == 1){imgPion4.setImageResource(R.drawable.pionleeg4);}
+
+		//Zet plaatjes pion wanneer deze in het veld zitten.
+		if (Game.statusPion1 == 2){
 			if (Game.currentPlayer == 1){imgPion1.setImageResource(R.drawable.piongroenveld1);}
 			else if (Game.currentPlayer == 2){imgPion1.setImageResource(R.drawable.pionroodveld1);}
 			else if (Game.currentPlayer == 3){imgPion1.setImageResource(R.drawable.pionzwartveld1);}
 			else if (Game.currentPlayer == 4){imgPion1.setImageResource(R.drawable.pionblauwveld1);}
 		}
-		//Update image pion 2
-		if (Game.positionp2 > 0){
+		if (Game.statusPion2 == 2){
 			if (Game.currentPlayer == 1){imgPion2.setImageResource(R.drawable.piongroenveld2);}
 			else if (Game.currentPlayer == 2){imgPion2.setImageResource(R.drawable.pionroodveld2);}
 			else if (Game.currentPlayer == 3){imgPion2.setImageResource(R.drawable.pionzwartveld2);}
 			else if (Game.currentPlayer == 4){imgPion2.setImageResource(R.drawable.pionblauwveld2);}			
 		}
-		//Update image pion 3
-		if (Game.positionp3 > 0){
+		if (Game.statusPion3 == 2){
 			if (Game.currentPlayer == 1){imgPion3.setImageResource(R.drawable.piongroenveld3);}
 			else if (Game.currentPlayer == 2){imgPion3.setImageResource(R.drawable.pionroodveld3);}
 			else if (Game.currentPlayer == 3){imgPion3.setImageResource(R.drawable.pionzwartveld3);}
 			else if (Game.currentPlayer == 4){imgPion3.setImageResource(R.drawable.pionblauwveld3);}			
 		}
-		//Update image pion 4
-		if (Game.positionp4 > 0){
+		if (Game.statusPion4 == 2){
 			if (Game.currentPlayer == 1){imgPion4.setImageResource(R.drawable.piongroenveld4);}
 			else if (Game.currentPlayer == 2){imgPion4.setImageResource(R.drawable.pionroodveld4);}
 			else if (Game.currentPlayer == 3){imgPion4.setImageResource(R.drawable.pionzwartveld4);}
 			else if (Game.currentPlayer == 4){imgPion4.setImageResource(R.drawable.pionblauwveld4);}			
 		}
 
-		//Alle pionen boven de positie 20 zitten in de finish
-		//De waarde 20 is een dummy getal
-		if (Game.positionp1 >= 20){
+		//Zet plaatjes pion wanneer deze in de finish zitten
+		if (Game.statusPion1 == 3){
 			if (Game.currentPlayer == 1){imgPion1.setImageResource(R.drawable.piongroenfinish1);}
 			else if (Game.currentPlayer == 2){imgPion1.setImageResource(R.drawable.pionroodfinish1);}
 			else if (Game.currentPlayer == 3){imgPion1.setImageResource(R.drawable.pionzwartfinish1);}
 			else if (Game.currentPlayer == 4){imgPion1.setImageResource(R.drawable.pionblauwfinish1);}
 		}
-		if (Game.positionp2 >= 20){
+		if (Game.statusPion2 == 3){
 			if (Game.currentPlayer == 1){imgPion2.setImageResource(R.drawable.piongroenfinish2);}
 			else if (Game.currentPlayer == 2){imgPion2.setImageResource(R.drawable.pionroodfinish2);}
 			else if (Game.currentPlayer == 3){imgPion2.setImageResource(R.drawable.pionzwartfinish2);}
 			else if (Game.currentPlayer == 4){imgPion2.setImageResource(R.drawable.pionblauwfinish2);}			
 		}
-		if (Game.positionp3 >= 20){
+		if (Game.statusPion3 == 3){
 			if (Game.currentPlayer == 1){imgPion3.setImageResource(R.drawable.piongroenfinish3);}
 			else if (Game.currentPlayer == 2){imgPion3.setImageResource(R.drawable.pionroodfinish3);}
 			else if (Game.currentPlayer == 3){imgPion3.setImageResource(R.drawable.pionzwartfinish3);}
 			else if (Game.currentPlayer == 4){imgPion3.setImageResource(R.drawable.pionblauwfinish3);}			
 		}
-		if (Game.positionp4 >= 20){
+		if (Game.statusPion4 == 3){
 			if (Game.currentPlayer == 1){imgPion4.setImageResource(R.drawable.piongroenfinish4);}
 			else if (Game.currentPlayer == 2){imgPion4.setImageResource(R.drawable.pionroodfinish4);}
 			else if (Game.currentPlayer == 3){imgPion4.setImageResource(R.drawable.pionzwartfinish4);}
@@ -182,7 +195,6 @@ public class Game extends Activity {
 		 */
 		if (hasTurn == 1)
 		{
-
 			//selecteer pion (onclicklisteners)
 
 			//Selecteer pion 1
@@ -192,59 +204,27 @@ public class Game extends Activity {
 				@Override
 				public void onClick(View v) 
 				{
-					if (positionp1 >= 20)
-					{
+					if (statusPion1 == 3){
 						Toast.makeText(getApplicationContext(), "This pawn has already reached the finish line!", Toast.LENGTH_SHORT).show();
 					}
-					else if ((positionp1 < 20)&&(hasBeenRolled == 1))
-					{
-						//Bereken positie met dice waarde
-						Game.positionp1 = Game.positionp1 + Dice.hasrolled;
-
+					else if (((statusPion1 == 1)||(statusPion1 == 2))&&(hasBeenRolled == 1)){
+						//Sla selectie op
+						selectedPion = 1;
+						dataReady = 1;
 						//WANNEER DE SPELER NUMMER 1 IS
-						if (currentPlayer == 1){//ZET P1 SELECTIE: Groen
-							if (positionp1 >= 20){
-								imgPion1.setImageResource(R.drawable.piongroenfinish1);
-								tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
-							}else if(positionp1 < 20){imgPion1.setImageResource(R.drawable.piongroenveld1select);}
-						}
+						if (currentPlayer == 1){imgPion1.setImageResource(R.drawable.piongroenveld1select);}
 						//WANNEER DE SPELER NUMMER 2 IS
-						else if(currentPlayer == 2){//ZET P1 SELECTIE: Rood
-
-							if (positionp1 >= 20){
-								imgPion1.setImageResource(R.drawable.pionroodfinish1);
-								tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
-							}else if(positionp1 < 20){imgPion1.setImageResource(R.drawable.pionroodveld1select);}
-						}
+						else if(currentPlayer == 2){imgPion1.setImageResource(R.drawable.pionroodveld1select);}
 						//WANNEER DE SPELER NUMMER 3 IS
-						else if (currentPlayer == 3){//ZET P1 SELECTIE: Zwart
-
-							if (positionp1 >= 20){
-								imgPion1.setImageResource(R.drawable.pionzwartfinish1);
-								tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
-							}else if(positionp1 < 20){imgPion1.setImageResource(R.drawable.pionzwartveld1select);}
-						}
+						else if (currentPlayer == 3){imgPion1.setImageResource(R.drawable.pionzwartveld1select);}
 						//WANNEER DE SPELER NUMMER 4 IS
-						else if (currentPlayer == 4){//ZET P1 SELECTIE: Blauw
-							if (positionp1 >= 20){
-								imgPion1.setImageResource(R.drawable.pionblauwfinish1);
-								tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
-							}else if(positionp1 < 20){imgPion1.setImageResource(R.drawable.pionblauwveld1select);}
-						}
+						else if (currentPlayer == 4){imgPion1.setImageResource(R.drawable.pionblauwveld1select);}
 						//reset dice waarde
 						Dice.hasrolled = 0;
-						Game.hasBeenRolled = 0;
+						new AsyncTaskClass_WsendData().execute();
 					}
 				}
 			});
-
-			/*
-			 * einde pion 1 selectie
-			 * ************************
-			 * **BREAK VOOR OVERZICHT**
-			 * ************************
-			 * begin pion 2 selectie
-			 */
 
 			//Selecteer pion 2
 			ImageView slcPion2 = (ImageView) findViewById(R.id.pion2);
@@ -253,57 +233,27 @@ public class Game extends Activity {
 				@Override
 				public void onClick(View v) 
 				{
-					if (positionp2 >= 20)
-					{
+					if (statusPion2 == 3){
 						Toast.makeText(getApplicationContext(), "This pawn has already reached the finish line!", Toast.LENGTH_SHORT).show();
 					}
-					else if ((positionp2 < 20)&&(hasBeenRolled == 1))
-					{
-						//Bereken positie met dice waarde
-						Game.positionp2 = Game.positionp2 + Dice.hasrolled;
-
+					else if (((statusPion1 == 1)||(statusPion1 == 2))&&(hasBeenRolled == 1)){
+						//Sla selectie op
+						selectedPion = 2;
+						dataReady = 1;
 						//WANNEER DE SPELER NUMMER 1 IS
-						if (currentPlayer == 1){//ZET P2 SELECTIE: Groen
-							if (positionp2 >= 20){
-								imgPion2.setImageResource(R.drawable.piongroenfinish2);
-								tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
-							}else{imgPion2.setImageResource(R.drawable.piongroenveld2select);}
-						}
+						if (currentPlayer == 1){imgPion2.setImageResource(R.drawable.piongroenveld2select);}
 						//WANNEER DE SPELER NUMMER 2 IS
-						else if(currentPlayer == 2){//ZET P2 SELECTIE: Rood
-							if (positionp2 >= 20){
-								imgPion2.setImageResource(R.drawable.pionroodfinish2);
-								tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
-							}else{imgPion2.setImageResource(R.drawable.pionroodveld2select);}
-						}
+						else if(currentPlayer == 2){imgPion2.setImageResource(R.drawable.pionroodveld2select);}
 						//WANNEER DE SPELER NUMMER 3 IS
-						else if (currentPlayer == 3){//ZET P2 SELECTIE: Zwart
-							if (positionp2 >= 20){
-								imgPion2.setImageResource(R.drawable.pionzwartfinish2);
-								tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
-							}else{imgPion2.setImageResource(R.drawable.pionzwartveld2select);}
-						}
+						else if (currentPlayer == 3){imgPion2.setImageResource(R.drawable.pionzwartveld2select);}
 						//WANNEER DE SPELER NUMMER 4 IS
-						else if (currentPlayer == 4){//ZET P2 SELECTIE: Blauw
-							if (positionp2 >= 20){
-								imgPion2.setImageResource(R.drawable.pionblauwfinish2);
-								tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
-							}else{imgPion2.setImageResource(R.drawable.pionblauwveld2select);}
-						}
+						else if (currentPlayer == 4){imgPion2.setImageResource(R.drawable.pionblauwveld2select);}
 						//reset dice waarde
 						Dice.hasrolled = 0;
-						Game.hasBeenRolled = 0;
+						new AsyncTaskClass_WsendData().execute();
 					}
 				}
 			});
-
-			/*
-			 * einde pion 2 selectie
-			 * ************************
-			 * **BREAK VOOR OVERZICHT**
-			 * ************************
-			 * begin pion 3 selectie
-			 */
 
 			//Selecteer pion 3
 			ImageView slcPion3 = (ImageView) findViewById(R.id.pion3);
@@ -312,58 +262,27 @@ public class Game extends Activity {
 				@Override
 				public void onClick(View v) 
 				{
-					if (positionp3 >= 20)
-					{
+					if (statusPion3 == 3){
 						Toast.makeText(getApplicationContext(), "This pawn has already reached the finish line!", Toast.LENGTH_SHORT).show();
 					}
-					else if ((positionp3 < 20)&&(hasBeenRolled == 1))
-					{
-						//Bereken positie met dice waarde
-						Game.positionp3 = Game.positionp3 + Dice.hasrolled;
-
+					else if (((statusPion1 == 1)||(statusPion1 == 2))&&(hasBeenRolled == 1)){
+						//Sla selectie op
+						selectedPion = 3;
+						dataReady = 1;
 						//WANNEER DE SPELER NUMMER 1 IS
-						if (currentPlayer == 1){//ZET P3 SELECTIE: Groen
-							if (positionp3 >= 20){
-								imgPion3.setImageResource(R.drawable.piongroenfinish3);
-								tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
-							}else{imgPion3.setImageResource(R.drawable.piongroenveld3select);}
-						}
+						if (currentPlayer == 1){imgPion3.setImageResource(R.drawable.piongroenveld3select);}
 						//WANNEER DE SPELER NUMMER 2 IS
-						else if(currentPlayer == 2){//ZET P3 SELECTIE: Rood
-							if (positionp3 >= 20){
-								imgPion3.setImageResource(R.drawable.pionroodfinish3);
-								tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
-							}else{imgPion3.setImageResource(R.drawable.pionroodveld3select);}
-						}
+						else if(currentPlayer == 2){imgPion3.setImageResource(R.drawable.pionroodveld3select);}
 						//WANNEER DE SPELER NUMMER 3 IS
-						else if (currentPlayer == 3){//ZET P3 SELECTIE: Zwart
-							if (positionp3 >= 20){
-								imgPion3.setImageResource(R.drawable.pionzwartfinish3);
-								tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
-							}
-							else{imgPion3.setImageResource(R.drawable.pionzwartveld3select);}
-						}
+						else if (currentPlayer == 3){imgPion3.setImageResource(R.drawable.pionzwartveld3select);}
 						//WANNEER DE SPELER NUMMER 4 IS
-						else if (currentPlayer == 4){//ZET P3 SELECTIE: Blauw
-							if (positionp3 >= 20){
-								imgPion3.setImageResource(R.drawable.pionblauwfinish3);
-								tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
-							}else{imgPion3.setImageResource(R.drawable.pionblauwveld3select);}
-						}
+						else if (currentPlayer == 4){imgPion3.setImageResource(R.drawable.pionblauwveld3select);}
 						//reset dice waarde
 						Dice.hasrolled = 0;
-						Game.hasBeenRolled = 0;
+						new AsyncTaskClass_WsendData().execute();
 					}
 				}
 			});
-
-			/*
-			 * einde pion 3 selectie
-			 * ************************
-			 * **BREAK VOOR OVERZICHT**
-			 * ************************
-			 * begin pion 4 selectie
-			 */
 
 			//Selecteer pion 4
 			ImageView slcPion4 = (ImageView) findViewById(R.id.pion4);
@@ -372,73 +291,40 @@ public class Game extends Activity {
 				@Override
 				public void onClick(View v) 
 				{
-					if (positionp4 >= 20)
-					{
+					if (statusPion4 == 3){
 						Toast.makeText(getApplicationContext(), "This pawn has already reached the finish line!", Toast.LENGTH_SHORT).show();
 					}
-					else if ((positionp4 < 20)&&(hasBeenRolled == 1))
-					{
-						//Bereken positie met dice waarde
-						Game.positionp4 = Game.positionp4 + Dice.hasrolled;
-
+					else if (((statusPion1 == 1)||(statusPion1 == 2))&&(hasBeenRolled == 1)){
+						//Sla selectie op
+						selectedPion = 4;
+						dataReady = 1;
 						//WANNEER DE SPELER NUMMER 1 IS
-						if (currentPlayer == 1){//ZET P4 SELECTIE: Groen
-							if (positionp4 >= 20){
-								imgPion4.setImageResource(R.drawable.piongroenfinish4);
-								tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
-							}else{imgPion4.setImageResource(R.drawable.piongroenveld4select);}
-						}
+						if (currentPlayer == 1){imgPion4.setImageResource(R.drawable.piongroenveld4select);}
 						//WANNEER DE SPELER NUMMER 2 IS
-						else if(currentPlayer == 2){//ZET P4 SELECTIE: Rood
-							if (positionp4 >= 20){
-								imgPion4.setImageResource(R.drawable.pionroodfinish4);
-								tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
-							}else{imgPion4.setImageResource(R.drawable.pionroodveld4select);}
-						}
+						else if(currentPlayer == 2){imgPion4.setImageResource(R.drawable.pionroodveld4select);}
 						//WANNEER DE SPELER NUMMER 3 IS
-						else if (currentPlayer == 3){//ZET P4 SELECTIE: Zwart
-							if (positionp4 >= 20){
-								imgPion4.setImageResource(R.drawable.pionzwartfinish4);
-								tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
-							}else{imgPion4.setImageResource(R.drawable.pionzwartveld4select);}
-						}
+						else if (currentPlayer == 3){imgPion4.setImageResource(R.drawable.pionzwartveld4select);}
 						//WANNEER DE SPELER NUMMER 4 IS
-						else if (currentPlayer == 4){//ZET P4 SELECTIE: Blauw
-							if (positionp4 >= 20){
-								imgPion4.setImageResource(R.drawable.pionblauwfinish4);
-								tada2.play(sound_id,1.0f,1.0f,0,0,1.0f);
-							}else{imgPion4.setImageResource(R.drawable.pionblauwveld4select);}
-						}
+						else if (currentPlayer == 4){imgPion4.setImageResource(R.drawable.pionblauwveld4select);}
 						//reset dice waarde
 						Dice.hasrolled = 0;
-						Game.hasBeenRolled = 0;
+						new AsyncTaskClass_WsendData().execute();
 					}
 				}
 			});
 		}
 		else if (hasTurn == 0)
 		{
-			//zet de rollbutton op de groene 'ok' kleur wanneer de speler mag rollen
-			if ((hasBeenRolled == 0) && (hasTurn == 1))
-			{
-				rollButton.setImageResource(R.drawable.rollbuttongreen);
-			}
-			//anders zet de rollbutton op de rode 'weiger' kleur
-			else if ((hasBeenRolled == 1) && (hasTurn == 1))
-			{
-				rollButton.setImageResource(R.drawable.rollbuttonred);
-			}
-			else if (((hasBeenRolled == 0) || (hasBeenRolled == 1)) && hasTurn == 0)
-			{
-				rollButton.setImageResource(R.drawable.rollbuttonred);
-			}
+			//niks
 		}
+
 		/////////////////////////////////////////////////
 		/////////////////////////////////////////////////
 		/////////////////////////////////////////////////
 		//EINDE GAME
-
 	}
+
+	//De code hieronder is voor het controleren van de volume, de code zet het gebruik van media-volume
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		switch (keyCode) {
@@ -454,10 +340,18 @@ public class Game extends Activity {
 			return false;
 		}
 	}
+
+	
 	///////////////////////////////
-	//Inner class AsyncTaskClass_R
-	public class AsyncTaskClass_R extends AsyncTask<Boolean, Void, String>
-	{		
+	//Inner class AsyncTaskClass_RhasTurn
+	public class AsyncTaskClass_RhasTurn extends AsyncTask<Boolean, Void, String>
+	{
+		//hasTurn
+		private static final String SOAP_ACTION_RhasTurn = "http://tempuri.org/turnGet";
+		private static final String METHOD_NAME_RhasTurn = "turnGet";
+		private static final String NAMESPACE_RhasTurn = "http://tempuri.org/";
+		private static final String URL_RhasTurn = "http://techniek.server-ict.nl:20824/Service.asmx";
+
 		@Override
 		protected String doInBackground(Boolean... params) {
 			if(params.length != 1) {
@@ -477,18 +371,18 @@ public class Game extends Activity {
 				}
 			}
 
-			SoapObject Request = new SoapObject(NAMESPACE_Rturn, METHOD_NAME_Rturn);
+			SoapObject Request = new SoapObject(NAMESPACE_RhasTurn, METHOD_NAME_RhasTurn);
 
 			SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			soapEnvelope.dotNet = true;
 			soapEnvelope.setOutputSoapObject(Request);
 
-			HttpTransportSE aht = new HttpTransportSE(URL_Rturn);
+			HttpTransportSE aht = new HttpTransportSE(URL_RhasTurn);
 
 			SoapPrimitive resultString = null;
 			try
 			{
-				aht.call(SOAP_ACTION_Rturn, soapEnvelope);
+				aht.call(SOAP_ACTION_RhasTurn, soapEnvelope);
 				resultString = (SoapPrimitive)soapEnvelope.getResponse();
 
 				return resultString.toString();
@@ -507,28 +401,253 @@ public class Game extends Activity {
 		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 		protected void onPostExecute(String result)
 		{	
-			//Is de game nog niet gestart door de lobby?
-			if(!(result.equals(Lobby.localPlayerString)))
+			String[] splitString = result.split(",");
+			//sla laatset timestamp op
+			timeStamp = Long.parseLong(splitString[1]);
+			getPlayer = Integer.parseInt(splitString[0]);
+			if (timeStamp > timeStampOld)
 			{
-				hasTurn = 0;
-				// Voorkomt dat thread sleep ervoor zorgt dat andere AsyncTasks
-				// op de thread sleep moeten wachten. (Voert beide AsyncTasks
-				// parallel i.p.v. serieel uit).
-				if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+				//controleren op spelers
+				if (currentPlayer == getPlayer)
 				{
-					new AsyncTaskClass_R().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, true);
+					hasTurn = 1;
+					hasBeenRolled = 0;
+					timeStampOld = timeStamp;
+					ImageView setBtn = (ImageView) findViewById(R.id.imageRoll);
+					setBtn.setImageResource(R.drawable.rollbuttongreen);
 				}
 				else
 				{
-					new AsyncTaskClass_R().execute(true);
+					hasTurn = 0;
+					ImageView setBtn = (ImageView) findViewById(R.id.imageRoll);
+					setBtn.setImageResource(R.drawable.rollbuttonred);
+					if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+					{
+						new AsyncTaskClass_RhasTurn().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, true);
+					}
+					else
+					{
+						new AsyncTaskClass_RhasTurn().execute(true);
+					}
 				}
 			}
-			//Is de game gestart door de lobby?
-			else if (result.equals(Lobby.localPlayerString))
+			else
 			{
-				hasTurn = 1;
+				hasTurn = 0;
+				ImageView setBtn = (ImageView) findViewById(R.id.imageRoll);
+				setBtn.setImageResource(R.drawable.rollbuttonred);
+				if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+				{
+					new AsyncTaskClass_RhasTurn().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, true);
+				}
+				else
+				{
+					new AsyncTaskClass_RhasTurn().execute(true);
+				}
 			}
 		}
 	}
-}
+	
+	///////////////////////////////
+	//Inner class AsyncTaskClass_RgetData
+	private class AsyncTaskClass_RgetData extends AsyncTask<Boolean, Void, String>
+	{
+		//getData (Pion status)
+		private static final String SOAP_ACTION_RgetData = "http://tempuri.org/pionGet";
+		private static final String METHOD_NAME_RgetData = "pionGet";
+		private static final String NAMESPACE_RgetData = "http://tempuri.org/";
+		private static final String URL_RgetData = "http://techniek.server-ict.nl:20824/Service.asmx";
 
+		@Override
+		protected String doInBackground(Boolean... params) {
+			if(params.length != 1) {
+				throw new IllegalArgumentException("params.length != 1");
+			}
+
+			if(params[0])
+			{
+				// Hier thread slapen i.p.v. dit in onPostExecute
+				// met de Handler methodes removeCallbacks en postDelayed en
+				// een Runnable met new AsyncTaskClass_R().execute();
+				// te doen. Je belast hierdoor niet de main thread.
+				try {
+					Thread.sleep(1000);         
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+
+			SoapObject Request = new SoapObject(NAMESPACE_RgetData, METHOD_NAME_RgetData);
+
+			SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+			soapEnvelope.dotNet = true;
+			soapEnvelope.setOutputSoapObject(Request);
+
+			HttpTransportSE aht = new HttpTransportSE(URL_RgetData);
+
+			SoapPrimitive resultString = null;
+			try
+			{
+				aht.call(SOAP_ACTION_RgetData, soapEnvelope);
+				resultString = (SoapPrimitive)soapEnvelope.getResponse();
+
+				return resultString.toString();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			// Wanneer try faalt return message
+			return ("Failed to connect");
+		}
+
+		// Implementeerd een hogere API versie dan minSdkVersion
+		// Fallback voor compatibiliteit met oudere versies zelf geïmplementeerd
+		// Anders fouten op die versies
+		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+		protected void onPostExecute(String result)
+		{	
+			//teruggestuurde data = statusPion1,statusPion2,statusPion3,statusPion4
+			//split op de komma
+			String[] splitString = result.split(",");
+			//Zet waarden
+			statusPion1 = Integer.parseInt(splitString[0]);
+			statusPion2 = Integer.parseInt(splitString[1]);
+			statusPion3 = Integer.parseInt(splitString[2]);
+			statusPion4 = Integer.parseInt(splitString[3]);
+
+			if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+			{
+				new AsyncTaskClass_RgetData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, true);
+			}
+			else
+			{
+				new AsyncTaskClass_RgetData().execute(true);
+			}
+		}
+	}
+
+	///////////////////////////////
+	//Inner class AsyncTaskClass_RgetError
+	@SuppressWarnings("unused")
+	private class AsyncTaskClass_RgetError extends AsyncTask<Boolean, Void, String>
+	{
+		//getError
+		private static final String SOAP_ACTION_RgetError = "http://tempuri.org/diceGet";
+		private static final String METHOD_NAME_RgetError = "diceGet";
+		private static final String NAMESPACE_RgetError = "http://tempuri.org/";
+		private static final String URL_RgetError = "http://techniek.server-ict.nl:20824/Service.asmx";
+
+		@Override
+		protected String doInBackground(Boolean... params) {
+			if(params.length != 1) {
+				throw new IllegalArgumentException("params.length != 1");
+			}
+
+			if(params[0])
+			{
+				// Hier thread slapen i.p.v. dit in onPostExecute
+				// met de Handler methodes removeCallbacks en postDelayed en
+				// een Runnable met new AsyncTaskClass_R().execute();
+				// te doen. Je belast hierdoor niet de main thread.
+				try {
+					Thread.sleep(1000);         
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+
+			SoapObject Request = new SoapObject(NAMESPACE_RgetError, METHOD_NAME_RgetError);
+
+			SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+			soapEnvelope.dotNet = true;
+			soapEnvelope.setOutputSoapObject(Request);
+
+			HttpTransportSE aht = new HttpTransportSE(URL_RgetError);
+
+			SoapPrimitive resultString = null;
+			try
+			{
+				aht.call(SOAP_ACTION_RgetError, soapEnvelope);
+				resultString = (SoapPrimitive)soapEnvelope.getResponse();
+
+				return resultString.toString();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			// Wanneer try faalt return message
+			return ("Failed to connect");
+		}
+
+		// Implementeerd een hogere API versie dan minSdkVersion
+		// Fallback voor compatibiliteit met oudere versies zelf geïmplementeerd
+		// Anders fouten op die versies
+		@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+		protected void onPostExecute(String result)
+		{	
+			//teruggestuurde data = statusPion1,statusPion2,statusPion3,statusPion4
+			//split op de komma
+			String[] splitString = result.split(",");
+			//Zet waarden
+			int errorGet = Integer.parseInt(splitString[3]);
+			if (errorGet == 1){
+				Toast.makeText(getApplicationContext(), "Your own pion is in the way, please select a different pion", Toast.LENGTH_SHORT).show();
+			}
+			else if (errorGet == 2){
+				Toast.makeText(getApplicationContext(), "Wrong data send", Toast.LENGTH_SHORT).show();
+			}
+			if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+			{
+				new AsyncTaskClass_RgetData().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, true);
+			}
+			else
+			{
+				new AsyncTaskClass_RgetData().execute(true);
+			}
+		}
+	}
+
+	///////////////////////////////
+	//Inner class AsyncTaskClass_WsendData
+	public class AsyncTaskClass_WsendData extends AsyncTask<Void, Void, String>
+	{
+		//sendData (Player + dice + pion + error)
+		private static final String SOAP_ACTION = "http://tempuri.org/diceSet";
+		private static final String METHOD_NAME = "diceSet";
+		private static final String NAMESPACE = "http://tempuri.org/";
+		private static final String URL = "http://techniek.server-ict.nl:20824/Service.asmx";
+
+		@Override
+		protected String doInBackground(Void... params) {
+
+
+			SoapObject Request = new SoapObject(NAMESPACE, METHOD_NAME);
+			Request.addProperty("player", currentPlayer);
+			Request.addProperty("worp", Dice.hasrolled);
+			Request.addProperty("pion", selectedPion);
+			Request.addProperty("error", 0);
+			
+			SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+			soapEnvelope.dotNet = true;
+			soapEnvelope.setOutputSoapObject(Request);
+
+			HttpTransportSE aht = new HttpTransportSE(URL);
+			try
+			{
+				aht.call(SOAP_ACTION, soapEnvelope);
+				SoapPrimitive resultString = (SoapPrimitive)soapEnvelope.getResponse();
+
+				return resultString.toString();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+
+			// Wanneer try failt return message
+			return "Failed to connect";
+		}
+	}
+}
