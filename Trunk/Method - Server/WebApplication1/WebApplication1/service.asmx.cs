@@ -34,10 +34,10 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public String diceSet(int player, int worp, int pion, int succesvol)// ,int gameID)
+        public String diceSet(int player, int worp, int pion, int error)// ,int gameID)
         {
             TextWriter tw = new StreamWriter("c:/inetpub/wwwroot/worp.txt");
-            String _string = player + "," + worp + "," + pion + "," + succesvol;// + "," + gameID;
+            String _string = player + "," + worp + "," + pion + "," + error;// + "," + gameID;
             tw.WriteLine(_string);
             tw.Close();
             return _string;
@@ -167,16 +167,32 @@ namespace WebApplication1
         [WebMethod]
         public string pionGet(int playerID)
         {
-            TextReader tr = new StreamReader("c:/inetpub/wwwroot/pion.txt");
-            string pion = tr.ReadLine();
-            tr.Close();
-            return pion;
+            String _string = String.Empty;
+
+            using (StreamReader sr = new StreamReader("c:/inetpub/wwwroot/pion.txt"))
+            {
+                while (!sr.EndOfStream)
+                {
+                    String[] pionSplit = sr.ReadLine().Split(',');
+
+                    if (int.Parse(pionSplit[0]) == playerID)
+                    {
+                        _string += pionSplit[2];
+                    }
+                }
+            }
+
+            if (String.IsNullOrEmpty(_string))
+            {
+                _string = "nothing";
+            }
+            return _string;
         }
 
         [WebMethod]
         public int pionSet(int playerID, int pion, int status)//, int gameID)
         {
-            File.AppendAllText("c:/inetpub/wwwroot/pion.txt", "\r\n" + playerID + "," + pion + "," + status); // + "," + gameID);
+            File.AppendAllText("c:/inetpub/wwwroot/pion.txt", playerID + "," + pion + "," + status + "\r\n"); // + "," + gameID);
             return playerID;
         }
 
