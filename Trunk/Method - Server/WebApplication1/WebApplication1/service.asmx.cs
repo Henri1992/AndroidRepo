@@ -134,6 +134,8 @@ namespace WebApplication1
 
         private void reset()
         {
+            diceSet(0, 0, 0, 11);
+
             StreamWriter swGameStart = new StreamWriter("c:/inetpub/wwwroot/gameStart.txt");
             swGameStart.Close();
 
@@ -190,10 +192,26 @@ namespace WebApplication1
         }
 
         [WebMethod]
-        public int pionSet(int playerID, int pion, int status)//, int gameID)
+        public String pionSet(int playerID, int pion, int status)//, int gameID)
         {
-            File.AppendAllText("c:/inetpub/wwwroot/pion.txt", playerID + "," + pion + "," + status + "\r\n"); // + "," + gameID);
-            return playerID;
+            String _string = playerID + "," + pion + "," + status;
+
+            String[] lines = File.ReadAllLines("c:/inetpub/wwwroot/pion.txt");
+            for (int i = 0; i < lines.Length; i++)
+            {
+                String[] lineSplit = lines[i].Split(',');
+
+                if (int.Parse(lineSplit[0]) == playerID && int.Parse(lineSplit[1]) == pion)
+                {
+                    lines[i] = _string;
+                    File.WriteAllLines("c:/inetpub/wwwroot/pion.txt", lines);
+                    return _string;
+                }
+            }
+
+            // Wanneer lijn er niet in staat voeg nieuwe lijn toe
+            File.AppendAllText("c:/inetpub/wwwroot/pion.txt", _string + "\r\n"); // + "," + gameID);
+            return _string;
         }
 
 
