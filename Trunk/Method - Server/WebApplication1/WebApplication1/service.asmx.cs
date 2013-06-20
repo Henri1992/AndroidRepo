@@ -179,7 +179,14 @@ namespace WebApplication1
 
                     if (int.Parse(pionSplit[0]) == playerID)
                     {
-                        _string += pionSplit[2];
+                        if (String.IsNullOrEmpty(_string))
+                        {
+                            _string = pionSplit[2];
+                        }
+                        else
+                        {
+                            _string += "," + pionSplit[2];
+                        }
                     }
                 }
             }
