@@ -27,7 +27,17 @@ public class Main extends Activity {
 		{
 			Toast.makeText(getApplicationContext(), "Connection failed", Toast.LENGTH_SHORT).show();
 			errorSet = 0;
-		}		
+		}
+		else if (errorSet == 3)//nog niet in gebruik
+		{
+			Toast.makeText(getApplicationContext(), "Game is full", Toast.LENGTH_SHORT).show();
+			errorSet = 0;
+		}
+		else if (errorSet == 4)//game is afgesloten
+		{
+			Toast.makeText(getApplicationContext(), "Game has ended", Toast.LENGTH_SHORT).show();
+			errorSet = 0;
+		}
 		//Search Button
 		ImageView imgSearch = (ImageView) findViewById(R.id.button_search);
 		imgSearch.setOnClickListener(new OnClickListener() 
@@ -37,6 +47,7 @@ public class Main extends Activity {
 		    {
 		    	Intent intent = new Intent(v.getContext(), Connect.class);
 				startActivityForResult(intent, 0);
+				Main.this.finish();
 		    }
 		});
 		

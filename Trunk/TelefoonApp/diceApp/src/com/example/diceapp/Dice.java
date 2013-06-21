@@ -4,17 +4,10 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapPrimitive;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -25,11 +18,6 @@ import android.os.Handler.Callback;
 
 public class Dice extends Activity 
 {
-	private static final String SOAP_ACTION_W = "http://tempuri.org/diceSet";
-	private static final String METHOD_NAME_W = "diceSet";
-	private static final String NAMESPACE_W = "http://tempuri.org/";
-	private static final String URL_W = "http://techniek.server-ict.nl:20824/service.asmx";
-	
 	public static int hasrolled;
 	
 	ImageView dice_picture;
@@ -138,7 +126,6 @@ public class Dice extends Activity
 				break;
 			default:
 			}
-			new AsyncTaskClass_W().execute();
 			rolling=false;
 			return true;
 		}
@@ -156,36 +143,5 @@ public class Dice extends Activity
 		timer.cancel();
 	}
 	
-	///////////////////////////////
-	//Inner class AsyncTaskClass_W
-	public class AsyncTaskClass_W extends AsyncTask<Void, Void, String>
-	{
-		@Override
-		protected String doInBackground(Void... params) {
-			
-			
-			SoapObject Request = new SoapObject(NAMESPACE_W, METHOD_NAME_W);
-			Request.addProperty("worp", Dice.hasrolled);
-			
-			SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-			soapEnvelope.dotNet = true;
-			soapEnvelope.setOutputSoapObject(Request);
-			
-			HttpTransportSE aht = new HttpTransportSE(URL_W);
-			try
-			{
-				aht.call(SOAP_ACTION_W, soapEnvelope);
-				SoapPrimitive resultString = (SoapPrimitive)soapEnvelope.getResponse();
-				
-				return resultString.toString();
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-			
-			// Wanneer try failt return message
-			return "Failed to connect";
-		}
-	}
+
 }
