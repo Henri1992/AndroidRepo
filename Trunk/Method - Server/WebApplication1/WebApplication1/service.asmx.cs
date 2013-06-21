@@ -37,7 +37,7 @@ namespace WebApplication1
         public String diceSet(int player, int worp, int pion, int error)// ,int gameID)
         {
             TextWriter tw = new StreamWriter("c:/inetpub/wwwroot/worp.txt");
-            String _string = player + "," + worp + "," + pion + "," + error;// + "," + gameID;
+            String _string = player + "," + worp + "," + pion + "," + DateTime.Now.Ticks + "," + error;// + "," + gameID;
             tw.WriteLine(_string);
             tw.Close();
             return _string;
